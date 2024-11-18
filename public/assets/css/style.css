@@ -1,0 +1,189 @@
+.sidebar {
+    width: 300px;
+    background: radial-gradient(
+        circle at top right,
+        /* Gradient memusat dari kiri atas */ #00456d 0%,
+        /* Warna biru tua pada awal */ #858585 65%,
+        /* Warna abu-abu di tengah */ #ffffff 100% /* Warna putih pada akhir */
+    );
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    gap: 20px;
+}
+
+.sidebar-wrapper {
+    background: linear-gradient(180deg, #00456d 0%, #858585 50%, #ffffff 100%);
+    min-height: 100vh; /* Pastikan hanya setinggi viewport */
+    width: 200px;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section {
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile-info h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.profile-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Jarak antar menu */
+}
+
+.menu-item {
+    background: #f3f3f3; /* Warna latar belakang tombol menu */
+    padding: 10px 15px; /* Padding dalam kotak */
+    border-radius: 10px; /* Radius sudut */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antara ikon dan teks */
+    transition: all 0.3s ease; /* Animasi saat hover */
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: black; /* Warna teks */
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Agar teks memenuhi ruang */
+}
+
+.menu-item:hover {
+    background: #e2e6ea; /* Warna saat hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih tegas saat hover */
+}
+
+.menu-item i {
+    font-size: 18px; /* Ukuran ikon */
+    color: rgb(63, 63, 63); /* Warna ikon menjadi hitam */
+    margin-right: 10px; /* Jarak antara ikon dan teks */
+}
+
+main {
+    margin-left: 200px; /* Sesuaikan dengan lebar sidebar */
+    padding: 20px;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Jarak antara profil dan menu */
+}
+
+.profile-card {
+    background: white; /* Latar belakang putih */
+    border-radius: 10px; /* Sudut melengkung */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
+    text-align: center; /* Pusatkan konten */
+    padding: 20px; /* Jarak dalam */
+    width: 200px; /* Lebar kotak */
+}
+
+.profile-picture {
+    width: 80px; /* Ukuran gambar profil */
+    height: 80px;
+    border-radius: 50%; /* Bentuk lingkaran */
+    object-fit: cover; /* Gambar tidak terdistorsi */
+    margin-bottom: 10px; /* Jarak bawah gambar */
+    border: 2px solid #00456d; /* Border di sekitar gambar */
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    color: #333; /* Warna teks */
+}
+
+.profile-id {
+    font-size: 14px;
+    color: #666; /* Warna teks */
+    margin: 0;
+}
+/* Sidebar Header */
+.sidebar-header {
+    display: flex; /* Flexbox untuk layout horizontal */
+    align-items: center; /* Vertikal rata tengah */
+    padding: 10px 20px; /* Memberikan ruang di dalam header */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Garis bawah */
+    margin-bottom: 20px; /* Jarak bawah */
+}
+
+.header-logo {
+    width: 50px; /* Ukuran logo */
+    height: 50px;
+    object-fit: contain; /* Agar gambar tidak terdistorsi */
+    margin-right: 10px; /* Jarak antara logo dan teks */
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column; /* Menumpuk teks "SIS" dan "Student Information System" */
+    color: white; /* Warna teks */
+}
+
+.header-text h4 {
+    font-size: 18px; /* Ukuran teks utama */
+    margin: 0;
+    font-weight: bold;
+}
+
+.header-text p {
+    font-size: 12px; /* Ukuran teks deskripsi */
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8); /* Warna teks deskripsi */
+}
