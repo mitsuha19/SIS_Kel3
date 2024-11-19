@@ -7,7 +7,7 @@
             <!-- Konten Utama -->
             <div class="app-content-header">
                 <div class="container-fluid">
-                    <h3 class="mb-0">Beranda </h3>
+                    <h3 class="mb-0">Bursar </h3>
                 </div>
             </div>
         </main>
