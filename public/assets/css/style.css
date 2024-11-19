@@ -1,28 +1,98 @@
-.sidebar {
-    width: 300px;
-    background: radial-gradient(
-        circle at top right,
-        /* Gradient memusat dari kiri atas */ #00456d 0%,
-        /* Warna biru tua pada awal */ #858585 65%,
-        /* Warna abu-abu di tengah */ #ffffff 100% /* Warna putih pada akhir */
-    );
-    color: white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app-wrapper {
     padding: 20px;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.card {
+    flex-grow: 1; /* Memastikan kartu menggunakan ruang yang tersedia */
+    max-width: 300px; /* Batas maksimal lebar */
+    min-width: 280px; /* Lebar minimal agar responsif */
+    border: none;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.card ul li {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.card img {
+    border: 2px solid #00456d;
+}
+
+.d-flex {
     display: flex;
+    flex-wrap: wrap; /* Membungkus jika ruang tidak cukup */
+    justify-content: space-evenly; /* Sebarkan kartu secara merata */
+    gap: 20px; /* Jarak antar elemen */
+    width: 100%; /* Lebar penuh */
+}
+
+.flex-column {
     flex-direction: column;
-    min-height: 100vh;
+}
+
+.gap-4 {
     gap: 20px;
 }
 
-.sidebar-wrapper {
-    background: linear-gradient(180deg, #00456d 0%, #858585 50%, #ffffff 100%);
-    min-height: 100vh; /* Pastikan hanya setinggi viewport */
-    width: 200px;
-    padding: 20px;
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.sidebar {
+    width: 300px; /* Lebar tetap */
+    min-height: 100vh; /* Sidebar selalu setinggi layar penuh */
+    background: radial-gradient(
+        circle at top right,
+        #00456d 0%,
+        #858585 65%,
+        #ffffff 100%
+    );
     color: white;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0; /* Jangan biarkan sidebar menyusut */
+    position: fixed; /* Sidebar tetap di posisi kiri */
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .profile-section {
@@ -157,9 +227,16 @@
     transition: transform 0.3s;
 }
 
+.sidebar,
 main {
-    margin-left: 200px; /* Sesuaikan dengan lebar sidebar */
+    min-height: 100vh; /* Setinggi layar */
+}
+
+main {
+    margin-left: 300px; /* Sama dengan lebar sidebar */
+    flex-grow: 1; /* Konten utama mengisi sisa ruang */
     padding: 20px;
+    min-height: 100vh; /* Setinggi layar penuh */
 }
 
 body {
@@ -180,6 +257,30 @@ body {
     text-align: center; /* Pusatkan konten */
     padding: 20px; /* Jarak dalam */
     width: 200px; /* Lebar kotak */
+}
+
+.profile-card a {
+    text-decoration: none; /* Hilangkan underline */
+    color: inherit; /* Gunakan warna yang diwariskan dari parent */
+    display: flex; /* Layout untuk menata konten secara fleksibel */
+    flex-direction: column; /* Konten vertikal */
+    align-items: center; /* Pusatkan konten secara horizontal */
+    cursor: pointer; /* Tetap bisa ditekan */
+}
+
+.profile-card a:hover {
+    color: inherit;
+    text-decoration: none; /* Pastikan underline tetap hilang */
+}
+
+.profile-card a:focus {
+    outline: none; /* Hilangkan outline default */
+    box-shadow: none; /* Tidak ada shadow tambahan */
+}
+
+.profile-card a:visited {
+    color: inherit; /* Warna tetap seperti teks biasa */
+    text-decoration: none; /* Tidak ada underline */
 }
 
 .profile-picture {

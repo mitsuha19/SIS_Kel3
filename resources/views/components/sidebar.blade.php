@@ -8,9 +8,12 @@
     </div>
     <div class="profile-section">
         <div class="profile-card">
-            <img src="{{ asset('assets/img/profil.jpg') }}" alt="Profile Picture" class="profile-picture">
-            <h4 class="profile-name">Rohit Panjaitan</h4>
-            <p class="profile-id">11S22036</p>
+            <a href="{{ route('profil') }}">
+                <img src="{{ asset('assets/img/profil.jpg') }}" alt="Profile Picture" class="profile-picture">
+                <h4 class="profile-name">Rohit Panjaitan</h4>
+                <p class="profile-id">11S22036</p>
+            </a>
+
         </div>
     </div>
     <ul class="menu">

@@ -14,9 +14,12 @@
 <body>
     <div class="app">
 
-        <div class="d-flex" style="min-height: 110vh;">
+        <div class="app-wrapper">
+            <!-- Sidebar -->
             @include('components.sidebar')
-            <main class="flex-grow-1 p-4">
+
+            <!-- Konten Utama -->
+            <main>
                 @yield('content')
             </main>
         </div>

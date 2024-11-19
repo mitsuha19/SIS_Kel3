@@ -41,3 +41,7 @@ Route::get('/asrama', function () {
 Route::get('/catatan_perilaku', function () {
     return view('catatanPerilaku/catatan_perilaku');
 })->name('catatan_perilaku');
+
+Route::get('/profil', function () {
+    return view('profil/profil');
+})->name('profil');
