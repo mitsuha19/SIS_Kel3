@@ -32,11 +32,12 @@
                 <i class="fas fa-calendar-alt"></i> Kalender Akademik
             </a>
         </li>
-        <li class="menu-item has-submenu">
+        <li class="menu-item">
             <a href="javascript:void(0);" onclick="toggleSubMenu('perkuliahan-submenu')">
                 <i class="fas fa-book"></i> Perkuliahan
                 <i class="fas fa-chevron-down submenu-toggle" id="perkuliahan-toggle"></i>
             </a>
+        </li>
             <ul class="submenu" id="perkuliahan-submenu" style="display: none;">
                 <li class="submenu-item">
                     <a href="{{ route('prodi') }}">
@@ -57,11 +58,12 @@
         </li>
 
         <!-- Perizinan dengan submenu -->
-        <li class="menu-item has-submenu">
+        <li class="menu-item">
             <a href="javascript:void(0);" onclick="toggleSubMenu('perizinan-submenu')">
                 <i class="fas fa-file-alt"></i> Perizinan
                 <i class="fas fa-chevron-down submenu-toggle" id="perizinan-toggle"></i>
             </a>
+        </li>   
             <ul class="submenu" id="perizinan-submenu" style="display: none;">
                 <li class="submenu-item">
                     <a href="{{ route('izin_bermalam') }}">
