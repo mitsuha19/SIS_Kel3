@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    <div class="app">
 
         <div class="app-wrapper">
             <!-- Sidebar -->
@@ -22,12 +21,12 @@
             <main>
                 @yield('content')
             </main>
-        </div>
 
-        <footer class="text-center py-3">
+            <footer class="text-center py-3">
             <p>© {{ date('Y') }} @GOORMET</p>
         </footer>
-    </div>
+        
+        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script> <!-- Tambahkan jika ada JavaScript tambahan -->
