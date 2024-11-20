@@ -3,13 +3,16 @@
 @section('content')
     <div class="app-wrapper d-flex">
 
-        <main class="app-main flex-grow-1 p-4">
-            <!-- Konten Utama -->
-            <div class="app-content-header">
-                <div class="container-fluid">
-                    <h3 class="mb-0">Izin Keluar</h3>
-                </div>
+        <div class="d-flex align-items-center mb-4">
+            <h5 class="me-auto">Home / Perizinan / Izin Keluar</h5>
+            <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+        </div>
+
+        <!-- Konten Utama -->
+        <div class="app-content-header">
+            <div class="container-fluid">
+                <h3 class="mb-0">Izin Keluar</h3>
             </div>
-        </main>
+        </div>
     </div>
 @endsection

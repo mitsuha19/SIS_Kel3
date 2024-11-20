@@ -2,14 +2,16 @@
 
 @section('content')
     <div class="app-wrapper d-flex">
+        <div class="d-flex align-items-center mb-4">
+            <h5 class="me-auto">Home </h5>
+            <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+        </div>
 
-        <main class="app-main flex-grow-1 p-4">
-            <!-- Konten Utama -->
-            <div class="app-content-header">
-                <div class="container-fluid">
-                    <h3 class="mb-0">Beranda </h3>
-                </div>
+        <!-- Konten Utama -->
+        <div class="app-content-header">
+            <div class="container-fluid">
+                <h3 class="mb-0">Beranda </h3>
             </div>
-        </main>
+        </div>
     </div>
 @endsection

@@ -5,7 +5,7 @@
 }
 
 .app-wrapper {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     align-items: center;
     width: 100%;
@@ -233,10 +233,10 @@ main {
 }
 
 main {
-    margin-left: 300px; /* Sama dengan lebar sidebar */
-    flex-grow: 1; /* Konten utama mengisi sisa ruang */
+    margin-left: 300px;
+    flex-grow: 1;
     padding: 20px;
-    min-height: 100vh; /* Setinggi layar penuh */
+    min-height: 100vh;
 }
 
 body {

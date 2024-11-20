@@ -5,7 +5,7 @@
         <!-- Header Halaman -->
         <div class="d-flex align-items-center mb-4">
             <h5 class="me-auto">Home / Profil</h5>
-            <i class="fas fa-sync-alt fs-5 cursor-pointer" title="Refresh"></i>
+            <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </div>
 
         <!-- Konten Utama -->
