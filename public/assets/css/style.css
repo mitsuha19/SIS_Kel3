@@ -49,9 +49,12 @@
     justify-content: space-evenly; /* Sebarkan kartu secara merata */
     gap: 20px; /* Jarak antar elemen */
     width: 100%; /* Lebar penuh */
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2); /* Garis bawah */
-    
 }
+
+.border-bottom-line {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2); /* Garis bawah */
+}
+
 
 .flex-column {
     flex-direction: column;
@@ -342,4 +345,8 @@ body {
 .custom-btn {
     background-color: #457EC0;
     border-color: #457EC0;  /* Mengubah border juga jika diperlukan */
+}
+.va-text {
+    color: rgb(48, 181, 234); /* Warna biru */
+   
 }

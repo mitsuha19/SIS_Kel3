@@ -2,23 +2,24 @@
 
 @section('content')
     <!-- Header -->
-    <div class="d-flex align-items-center mb-4">
-        <h4 class="me-auto">Home / Bursar</h4>
+    <div class="d-flex align-items-center mb-4 border-bottom-line">
+        <h3 class="me-auto"> <i class="fas fa-wallet"></i> Home / Bursar</h3>
         <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
     </div>
-
-    <div class="mb-4 text-start">
-        <h5 class="mb-2">Tagihan Terbaru</h5>
-        <button class="btn btn-primary custom-btn mb-5">Semua Tagihan Sudah Diproses</button>
-    </div>
-
-
+ 
+    <div class=" d-flex mb-4 text-start">
+        <div class="me-auto">
+            <h4 class="mb-2">Tagihan Terbaru</h4>
+            <button class="btn btn-primary custom-btn mb-5">Semua Tagihan Sudah Diproses</button>
+        </div>
+        <h5 class="va-text mb-5">VA (Bank Mandiri) 8823 3111 1722 035</h5>
+    </div> 
 
     <!-- Riwayat Tagihan -->
         <div class="card-header bg-white mt-5 mb-4">
-            <h5 class="text-start">History Tagihan</h5>
-            <h6 class=" text-start"> CLOSED: Closed Payment, VER: Verified, VWC: Verified With Credit, POS: Postponed, </h6>
-            <h6 class=" text-start">  NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit </h6>
+            <h4 class="text-start"><i class= "fas fa-history me-2"></i> History Tagihan</h4>
+            <h5 class=" text-start"><i class="fas fa-lock me-2"></i> CLOSED: Closed Payment, VER: Verified, VWC: Verified With Credit, POS: Postponed, </h5>
+            <h5 class=" text-start">  NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit </h5>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
