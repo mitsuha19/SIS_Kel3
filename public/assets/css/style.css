@@ -49,6 +49,8 @@
     justify-content: space-evenly; /* Sebarkan kartu secara merata */
     gap: 20px; /* Jarak antar elemen */
     width: 100%; /* Lebar penuh */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2); /* Garis bawah */
+    
 }
 
 .flex-column {
@@ -336,4 +338,8 @@ body {
     font-size: 12px; /* Ukuran teks deskripsi */
     margin: 0;
     color: rgba(255, 255, 255, 0.8); /* Warna teks deskripsi */
+}
+.custom-btn {
+    background-color: #457EC0;
+    border-color: #457EC0;  /* Mengubah border juga jika diperlukan */
 }
