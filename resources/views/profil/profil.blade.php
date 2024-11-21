@@ -5,7 +5,10 @@
         <!-- Header Halaman -->
         <div class="d-flex align-items-center mb-4">
             <h5 class="me-auto">Home / Profil</h5>
-            <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+            <a href="{{ route('logout') }}">
+                <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+            </a>
+
         </div>
 
         <!-- Konten Utama -->

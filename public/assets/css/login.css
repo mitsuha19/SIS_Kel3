@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #014871, #d7ede2);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+}
+.welcome-section {
+    flex: 1;
+    color: white;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+}
+.welcome-content {
+    margin-left: 20px;
+}
+
+.welcome-section img {
+    width: 150px;
+}
+.welcome-section h1 {
+    font-size: 2.5rem;
+    margin: 20px 0 10px;
+}
+.welcome-section p {
+    font-size: 1.2rem;
+}
+.login-section {
+    flex: 1;
+    background: linear-gradient(to bottom, #014871, #ffffff);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.login-section h2 {
+    text-align: center;
+    color: #1e5396;
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.form-group .icon {
+    position: absolute;
+    right: 15px;
+    top: 35px;
+    font-size: 1.2rem;
+    color: #999;
+}
+.btn {
+    width: 100%;
+    background: #1e5396;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.btn:hover {
+    background: #163e73;
+}
