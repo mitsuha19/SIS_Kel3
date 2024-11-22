@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'check.session' => CheckSession::class, // Alias untuk middleware CheckSession
+            'auth.session' => CheckSession::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -2,8 +2,8 @@
 
 @section('content')
     <!-- Header -->
-    <div class="d-flex align-items-center mb-4">
-        <h4 class="me-auto">Home / Perizinan / Izin Keluar</h4>
+    <div class="d-flex align-items-center mb-4 border-bottom-line">
+        <h3 class="me-auto">Home / Perizinan / Izin Keluar</h3>
         <a href="{{ route('logout') }}">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>

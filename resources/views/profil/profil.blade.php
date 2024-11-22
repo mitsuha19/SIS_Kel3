@@ -2,16 +2,14 @@
 
 @section('content')
     <div class="app-wrapper px-4">
-        <!-- Header Halaman -->
-        <div class="d-flex align-items-center mb-4">
-            <h5 class="me-auto">Home / Profil</h5>
+        <div class="d-flex align-items-center mb-4 border-bottom-line">
+            <h3 class="me-auto">Home / Profil</h3>
             <a href="{{ route('logout') }}">
                 <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
             </a>
 
         </div>
 
-        <!-- Konten Utama -->
         <div class="d-flex flex-column align-items-center">
             <!-- Foto Profil -->
             <div class="card text-center shadow-sm mb-4" style="width: 300px;">

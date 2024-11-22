@@ -28,33 +28,28 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="{{ route('kalender') }}">
-                <i class="fas fa-calendar-alt"></i> Kalender Akademik
-            </a>
-        </li>
-        <li class="menu-item">
             <a href="javascript:void(0);" onclick="toggleSubMenu('perkuliahan-submenu')">
                 <i class="fas fa-book"></i> Perkuliahan
                 <i class="fas fa-chevron-down submenu-toggle" id="perkuliahan-toggle"></i>
             </a>
         </li>
-            <ul class="submenu" id="perkuliahan-submenu" style="display: none;">
-                <li class="submenu-item">
-                    <a href="{{ route('prodi') }}">
-                        <i class="fas fa-user"></i> Prodi
-                    </a>
-                </li>
-                <li class="submenu-item">
-                    <a href="{{ route('jadwal') }}">
-                        <i class="fas fa-calendar-alt"></i> Jadwal
-                    </a>
-                </li>
-                <li class="submenu-item">
-                    <a href="{{ route('kemajuan_studi') }}">
-                        <i class="fas fa-chart-line"></i> Kemajuan Studi
-                    </a>
-                </li>
-            </ul>
+        <ul class="submenu" id="perkuliahan-submenu" style="display: none;">
+            <li class="submenu-item">
+                <a href="{{ route('prodi') }}">
+                    <i class="fas fa-user"></i> Prodi
+                </a>
+            </li>
+            <li class="submenu-item">
+                <a href="{{ route('jadwal') }}">
+                    <i class="fas fa-calendar-alt"></i> Jadwal
+                </a>
+            </li>
+            <li class="submenu-item">
+                <a href="{{ route('kemajuan_studi') }}">
+                    <i class="fas fa-chart-line"></i> Kemajuan Studi
+                </a>
+            </li>
+        </ul>
         </li>
 
         <!-- Perizinan dengan submenu -->
@@ -63,19 +58,19 @@
                 <i class="fas fa-file-alt"></i> Perizinan
                 <i class="fas fa-chevron-down submenu-toggle" id="perizinan-toggle"></i>
             </a>
-        </li>   
-            <ul class="submenu" id="perizinan-submenu" style="display: none;">
-                <li class="submenu-item">
-                    <a href="{{ route('izin_bermalam') }}">
-                        <i class="fas fa-moon"></i> Izin Bermalam
-                    </a>
-                </li>
-                <li class="submenu-item">
-                    <a href="{{ route('izin_keluar') }}">
-                        <i class="fas fa-walking"></i> Izin Keluar
-                    </a>
-                </li>
-            </ul>
+        </li>
+        <ul class="submenu" id="perizinan-submenu" style="display: none;">
+            <li class="submenu-item">
+                <a href="{{ route('izin_bermalam') }}">
+                    <i class="fas fa-moon"></i> Izin Bermalam
+                </a>
+            </li>
+            <li class="submenu-item">
+                <a href="{{ route('izin_keluar') }}">
+                    <i class="fas fa-walking"></i> Izin Keluar
+                </a>
+            </li>
+        </ul>
         </li>
 
         <li class="menu-item">

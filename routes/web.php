@@ -35,10 +35,6 @@ Route::middleware('auth.session')->group(function () {
         return view('bursar/bursar');
     })->name('bursar');
 
-    Route::get('/Kalender-akademik', function () {
-        return view('kalender/kalender');
-    })->name('kalender');
-
     Route::get('/perkuliahan/jadwal', function () {
         return view('perkuliahan/jadwal');
     })->name('jadwal');
