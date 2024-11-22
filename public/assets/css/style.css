@@ -55,7 +55,6 @@
     border-bottom: 2px solid rgba(0, 0, 0, 0.2); /* Garis bawah */
 }
 
-
 .flex-column {
     flex-direction: column;
 }
@@ -343,10 +342,16 @@ body {
     color: rgba(255, 255, 255, 0.8); /* Warna teks deskripsi */
 }
 .custom-btn {
-    background-color: #457EC0;
-    border-color: #457EC0;  /* Mengubah border juga jika diperlukan */
+    background-color: #457ec0;
+    border-color: #457ec0; /* Mengubah border juga jika diperlukan */
 }
 .va-text {
     color: rgb(48, 181, 234); /* Warna biru */
-   
+}
+
+#kemajuanStudiChart {
+    width: 100%;
+    max-width: 600px; /* Atur sesuai kebutuhan */
+    height: 300px; /* Tinggi elemen */
+    display: block; /* Mencegah masalah floating */
 }
