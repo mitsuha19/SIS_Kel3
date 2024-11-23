@@ -7,7 +7,6 @@
             <a href="{{ route('logout') }}">
                 <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
             </a>
-
         </div>
 
         <div class="d-flex flex-column align-items-center">
@@ -16,30 +15,32 @@
                 <img src="{{ asset('assets/img/profil.jpg') }}" alt="Profile Picture" class="rounded-circle mt-3 mx-auto"
                     style="width: 150px; height: 150px; object-fit: cover;">
                 <div class="card-body">
-                    <h5 class="card-title mb-0">Rohit Panjaitan</h5>
-                    <p class="text-muted">11S22036</p>
+                    <h5 class="card-title mb-0">{{ $student['nama'] ?? 'Nama Tidak Ditemukan' }}</h5>
+                    <p class="text-muted">{{ $student['nim'] ?? 'NIM Tidak Ditemukan' }}</p>
                 </div>
             </div>
 
             <!-- Kolom Data -->
             <div class="d-flex justify-content-between align-items-start flex-wrap w-100">
-                <!-- Data Ayah -->
-                <div class="card shadow-sm p-3 m-2 flex-grow-1" style="max-width: 300px;">
-                    <h5 class="card-title text-center mb-3">DATA AYAH</h5>
-                    <ul class="list-unstyled">
-                        <li><strong>Nama:</strong> Pardede Sinaga</li>
-                        <li><strong>Email:</strong> pardede.sinaga@gmail.com</li>
-                        <li><strong>No. Telepon:</strong> 081298765432</li>
-                    </ul>
-                </div>
-
                 <!-- Data Pribadi -->
                 <div class="card shadow-sm p-3 m-2 flex-grow-1" style="max-width: 300px;">
                     <h5 class="card-title text-center mb-3">DATA PRIBADI</h5>
                     <ul class="list-unstyled">
-                        <li><strong>Nama:</strong> Rohit Panjaitan</li>
-                        <li><strong>Email:</strong> ifs22036@students.del.ac.id</li>
-                        <li><strong>No. Telepon:</strong> 082273434986</li>
+                        <li><strong>Nama:</strong> {{ $student['nama'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>Email:</strong> {{ $student['email'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>HP:</strong> {{ $student['hp'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>Prodi:</strong> {{ $student['prodi'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>Fakultas:</strong> {{ $student['fakultas'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>Asrama:</strong> {{ $student['asrama'] ?? 'Data Tidak Ditemukan' }}</li>
+                    </ul>
+                </div>
+
+                <!-- Data Ayah -->
+                <div class="card shadow-sm p-3 m-2 flex-grow-1" style="max-width: 300px;">
+                    <h5 class="card-title text-center mb-3">DATA AYAH</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Nama Ayah:</strong> {{ $student['nama_ayah'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>No. HP Ayah:</strong> {{ $student['no_hp_ayah'] ?? 'Data Tidak Ditemukan' }}</li>
                     </ul>
                 </div>
 
@@ -47,9 +48,8 @@
                 <div class="card shadow-sm p-3 m-2 flex-grow-1" style="max-width: 300px;">
                     <h5 class="card-title text-center mb-3">DATA IBU</h5>
                     <ul class="list-unstyled">
-                        <li><strong>Nama:</strong> Maria Simorangkir</li>
-                        <li><strong>Email:</strong> maria.simorangkir@gmail.com</li>
-                        <li><strong>No. Telepon:</strong> 082234567890</li>
+                        <li><strong>Nama Ibu:</strong> {{ $student['nama_ibu'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>No. HP Ibu:</strong> {{ $student['no_hp_ibu'] ?? 'Data Tidak Ditemukan' }}</li>
                     </ul>
                 </div>
             </div>

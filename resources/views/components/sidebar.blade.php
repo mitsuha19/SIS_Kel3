@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="sidebar-header">
-        <img src="{{ asset('assets/img/logo_Del.jpg') }}" alt="Logo" class="header-logo">
+        <img src="{{ asset('assets\img\Logo Institut Teknologi Del.png') }}" alt="Logo" class="header-logo">
         <div class="header-text">
             <h4>SIS</h4>
             <p>Student Information System</p>
@@ -10,8 +10,12 @@
         <div class="profile-card">
             <a href="{{ route('profil') }}">
                 <img src="{{ asset('assets/img/profil.jpg') }}" alt="Profile Picture" class="profile-picture">
-                <h4 class="profile-name">Rohit Panjaitan</h4>
-                <p class="profile-id">11S22036</p>
+                <h4 class="profile-name">
+                    {{ session('student_data.nama') ?? 'Nama Tidak Ditemukan' }}
+                </h4>
+                <p class="profile-id">
+                    {{ session('student_data.nim') ?? 'NIM Tidak Ditemukan' }}
+                </p>
             </a>
 
         </div>
