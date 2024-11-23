@@ -42,7 +42,7 @@
                 <tr>
                     <td>1</td>
                     <td>2024/Gasal/November</td>
-                    <td>CLOSED 2,187,500.00</td>
+                    <td>2,187,500.00</td>
                     <td>-</td>
                     <td>2,187,500.00</td>
                     <td>VER</td>
@@ -55,7 +55,7 @@
                 <tr>
                     <td>2</td>
                     <td>2024/Gasal/Oktober</td>
-                    <td>CLOSED 2,187,500.00</td>
+                    <td>2,187,500.00</td>
                     <td>-</td>
                     <td>2,187,500.00</td>
                     <td>VER</td>
@@ -68,7 +68,7 @@
                 <tr>
                     <td>3</td>
                     <td>2024/Gasal/September</td>
-                    <td>CLOSED 2,187,500.00</td>
+                    <td>2,187,500.00</td>
                     <td>-</td>
                     <td>2,187,500.00</td>
                     <td>VER</td>
