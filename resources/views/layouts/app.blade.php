@@ -55,7 +55,7 @@
                 labels: ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5'],
                 datasets: [{
                     label: 'Kemajuan Studi',
-                    data: [3, 3.5, 4, 4.2, 4.5],
+                    data: [3.2, 3.1, 3.4, 3.4, 3.8],
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2,
                     fill: false

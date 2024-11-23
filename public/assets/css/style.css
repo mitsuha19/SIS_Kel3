@@ -13,12 +13,21 @@
 
 .card {
     flex-grow: 1; /* Memastikan kartu menggunakan ruang yang tersedia */
-    max-width: 300px; /* Batas maksimal lebar */
     min-width: 280px; /* Lebar minimal agar responsif */
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+}
+
+.cards {
+    flex-grow: 1; /* Memastikan kartu menggunakan ruang yang tersedia */
+    max-width: 400px; /* Batas maksimal lebar */
+    min-width: 280px; /* Lebar minimal agar responsif */
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    margin:0px;
 }
 
 .card-title {
@@ -354,4 +363,21 @@ body {
     max-width: 600px; /* Atur sesuai kebutuhan */
     height: 300px; /* Tinggi elemen */
     display: block; /* Mencegah masalah floating */
+}
+/* Warna untuk kategori Kemahasiswaan */
+.purplee {
+    color: #8a09ed; /* Warna hijau */
+}
+
+/* Warna untuk kategori Info */
+.bluee {
+    color: #1b10f7; /* Warna biru */
+}
+
+.redd{
+    color: #dc3545; /* Warna merah */
+}
+
+.pengumuman{
+    margin-bottom: 10px;
 }
