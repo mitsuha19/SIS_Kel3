@@ -89,8 +89,9 @@
 }
 
 .sidebar {
-    width: 300px; /* Lebar tetap */
-    min-height: 100vh; /* Sidebar selalu setinggi layar penuh */
+    width: 300px;
+    min-height: 100vh; 
+    max-height: 100vh;
     background: radial-gradient(
         circle at top right,
         #00456d 0%,
@@ -106,6 +107,7 @@
     top: 0;
     left: 0;
     z-index: 1000;
+    overflow-y: auto;
 }
 
 .profile-section {
