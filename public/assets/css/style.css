@@ -399,3 +399,25 @@ body {
     max-width: 10%;
 }
 
+/* Modal Header */
+.modal-header {
+    background: linear-gradient(135deg, #4A90E2, #50C2E3);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Form Controls */
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Tombol Footer */
+.modal-footer .btn {
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
