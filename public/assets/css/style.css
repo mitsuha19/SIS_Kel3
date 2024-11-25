@@ -421,3 +421,57 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+ /* Mengatur font untuk seluruh container */
+ h4, ul, ul li, .btn {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling tambahan untuk judul h4 */
+h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Styling untuk daftar ul */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Styling untuk setiap item li */
+ul li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #555;
+}
+
+/* Styling untuk span dengan class text-primary dan text-danger */
+.text-primary {
+    color: #007bff; /* Warna biru */
+    font-weight: 600;
+}
+
+.text-danger {
+    color: #dc3545; /* Warna merah */
+    font-weight: 600;
+}
+
+/* Styling tombol */
+.btn {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
