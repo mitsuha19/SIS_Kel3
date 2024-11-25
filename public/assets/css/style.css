@@ -27,7 +27,7 @@
     border: none;
     border-radius: 10px;
     background-color: #fff;
-    margin:0px;
+    margin: 0px;
 }
 
 .card-title {
@@ -90,7 +90,7 @@
 
 .sidebar {
     width: 300px;
-    min-height: 100vh; 
+    min-height: 100vh;
     max-height: 100vh;
     background: radial-gradient(
         circle at top right,
@@ -366,21 +366,23 @@ body {
     height: 300px; /* Tinggi elemen */
     display: block; /* Mencegah masalah floating */
 }
-/* Warna untuk kategori Kemahasiswaan */
-.purplee {
-    color: #8a09ed; /* Warna hijau */
+.text-purple {
+    color: #6f42c1; /* Ungu */
+}
+.text-primary {
+    color: #007bff; /* Biru */
+}
+.text-danger {
+    color: #dc3545; /* Merah */
+}
+.text-info {
+    color: #17a2b8; /* Biru muda */
+}
+.text-success {
+    color: #28a745; /* Hijau */
 }
 
-/* Warna untuk kategori Info */
-.bluee {
-    color: #1b10f7; /* Warna biru */
-}
-
-.redd{
-    color: #dc3545; /* Warna merah */
-}
-
-.pengumuman{
+.pengumuman {
     margin-bottom: 10px;
 }
 .matkul {
@@ -390,7 +392,8 @@ body {
     margin: 0 auto; /* Tempatkan tabel di tengah container */
 }
 
-.table td, .table th {
+.table td,
+.table th {
     padding: 10px;
     width: 10%; /* Menambah jarak dalam sel */
     max-width: 10%;

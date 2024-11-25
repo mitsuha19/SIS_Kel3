@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengumuman;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -47,7 +48,9 @@ class HomeController extends Controller
                 Log::info('Data labels:', $labels);
                 Log::info('Data values:', $values);
 
-                return view('beranda.home', compact('labels', 'values'));
+                $pengumuman = Pengumuman::orderBy('created_at', 'desc')->get();
+
+                return view('beranda.home', compact('labels', 'values', 'pengumuman'));
             }
 
             Log::error('Gagal mengambil data API', ['response' => $response->body()]);

@@ -28,19 +28,33 @@
                 </div>
 
                 <!-- Pengumuman -->
+                <!-- Pengumuman -->
                 <div class="col-md-6">
-                    <div class="cards p-3 ">
+                    <div class="cards p-3">
                         <h5 class="border-bottom-line text-start">PENGUMUMAN</h5>
                         <ul class="list-unstyled text-start pengumuman">
-                        <li><strong class="purplee">[KEMAHASISWAAN]</strong> Ketentuan dan Prosedur Pembayaran Bursar Mahasiswa</li>
-                        <li><strong class="redd">[INFO]</strong> Ret-Reat 2022 Gelombang Ke-2</li>
-                        <li><strong class="redd">[INFO]</strong> Ret-Reat 2022 Gelombang Ke-1</li>
-                        <li><strong class="bluee">[BURSAR]</strong> Pembayaran Bursar Mahasiswa Oktober 2024</li>
-                        <li><strong class="purplee">[BEM]</strong> Kegiatan Mahasiswa Festival Seni Budaya 2024</li>
-                            <!-- Tambahkan pengumuman lainnya -->
+                            @forelse ($pengumuman as $item)
+                                <li>
+                                    <strong
+                                        class="@switch($item->sumber)
+                        @case('BEM') text-primary @break
+                        @case('INFO') text-danger @break
+                        @case('BURSAR') text-info @break
+                        @case('KEASRAMAAN') text-success @break
+                        @case('KEMAHASISWAAN') text-purple @break
+                        @default text-dark
+                    @endswitch">
+                                        [{{ strtoupper($item->sumber) }}]
+                                    </strong>
+                                    {{ $item->judul }}
+                                </li>
+                            @empty
+                                <li class="text-muted">Belum ada pengumuman.</li>
+                            @endforelse
                         </ul>
                     </div>
                 </div>
+
             </div>
 
             <!-- Tombol Unduh Kalender -->
@@ -49,8 +63,7 @@
                     <button class="btn btn-primary me-2">Unduh Kalender Akademik!</button>
                     <button class="btn btn-primary">Unduh Kalender BEM!</button>
                 </div>
-           
+
+            </div>
         </div>
-    </div>
-    
-@endsection
+    @endsection

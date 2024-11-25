@@ -13,7 +13,7 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.login'); // Pastikan view login ada di folder 'resources/views/auth/login.blade.php'
+        return view('auth.login');
     }
     public function login(Request $request)
     {
