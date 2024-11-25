@@ -25,17 +25,27 @@ class UserSeeder extends Seeder
         ]);
 
         $users = [];
+        $batches = [
+            ['start' => 11417000, 'count' => 50], // Batch 2
+            ['start' => 11418000, 'count' => 50], // Batch 3
+            ['start' => 11419000, 'count' => 50], // Batch 3
+            ['start' => 11420000, 'count' => 50], // Batch 3
 
-        for ($i = 1; $i <= 50; $i++) {
-            $nim = 11416000 + $i; // Generate NIM from 11416001 to 11416050
-            $users[] = [
-                'username' => 'user' . $i,
-                'password' => Hash::make('password'), // Hash password
-                'nim' => $nim,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+        ];
+
+        foreach ($batches as $batch) {
+            for ($i = 1; $i <= $batch['count']; $i++) {
+                $nim = $batch['start'] + $i; // Generate NIM
+                $users[] = [
+                    'username' => 'user' . $nim, // Unique username
+                    'password' => Hash::make('password'), // Hash password
+                    'nim' => $nim,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
         }
+
 
         DB::table('users')->insert($users); // Insert data into the 'users' table
     }

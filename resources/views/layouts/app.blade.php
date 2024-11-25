@@ -49,37 +49,25 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const canvasElement = document.getElementById('kemajuanStudiChart');
-            if (!canvasElement) {
-                console.error('Canvas element not found');
-                return;
-            }
-
-            const ctx = canvasElement.getContext('2d');
-            console.log('Chart context:', ctx);
-
-            const chartData = {
-                labels: ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5'],
-                datasets: [{
-                    label: 'Kemajuan Studi',
-                    data: [3.2, 3.1, 3.4, 3.4, 3.8],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
-            };
-
-            console.log('Chart Data:', chartData);
+            const ctx = document.getElementById('kemajuanStudiChart').getContext('2d');
+            const labels = @json($labels ?? []);
+            const data = @json($values ?? []);
 
             new Chart(ctx, {
                 type: 'line',
-                data: chartData,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Kemajuan Studi',
+                        data: data,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true, // Jaga rasio aspek
-                    animation: {
-                        duration: 0 // Nonaktifkan animasi
-                    },
+                    maintainAspectRatio: true,
                     plugins: {
                         legend: {
                             display: true
@@ -95,14 +83,16 @@
                         y: {
                             title: {
                                 display: true,
-                                text: 'Nilai'
-                            }
+                                text: 'IP Semester'
+                            },
+                            beginAtZero: true
                         }
                     }
                 }
             });
         });
     </script>
+
 
     <script>
         function toggleSubMenu(submenuId) {

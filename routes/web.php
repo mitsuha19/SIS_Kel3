@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\ProfilController;
 
@@ -12,7 +13,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Middleware untuk akses yang memerlukan autentikasi
 Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->group(function () {
-    Route::view('/beranda', 'beranda/home')->name('beranda');
+    Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     Route::view('/bursar', 'bursar/bursar')->name('bursar');
     Route::view('/perkuliahan/jadwal', 'perkuliahan/jadwal')->name('jadwal');
     Route::view('/perkuliahan/kemajuan_studi', 'perkuliahan/kemajuan_studi')->name('kemajuan_studi');
