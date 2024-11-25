@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\ProfilController;
 
 // Login dan Logout
@@ -10,7 +11,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Middleware untuk akses yang memerlukan autentikasi
-Route::middleware(['auth.session', 'ensure.student.data'])->group(function () {
+Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->group(function () {
     Route::view('/beranda', 'beranda/home')->name('beranda');
     Route::view('/bursar', 'bursar/bursar')->name('bursar');
     Route::view('/perkuliahan/jadwal', 'perkuliahan/jadwal')->name('jadwal');
@@ -23,4 +24,8 @@ Route::middleware(['auth.session', 'ensure.student.data'])->group(function () {
 
     // Profil
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+});
+
+Route::middleware(['auth.session', 'role:admin'])->group(function () {
+    Route::get('/beranda/admin', [adminController::class, 'index'])->name('admin');
 });

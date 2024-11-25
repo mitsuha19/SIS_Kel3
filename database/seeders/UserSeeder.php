@@ -15,6 +15,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert([
+            'username' => 'admin',
+            'password' => Hash::make('admin'), // Password untuk admin
+            'nim' => 'admin',
+            'role' => 'admin', // Role admin
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $users = [];
 
         for ($i = 1; $i <= 50; $i++) {

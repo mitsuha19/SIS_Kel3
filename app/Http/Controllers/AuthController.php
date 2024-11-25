@@ -32,7 +32,8 @@ class AuthController extends Controller
 
         // Jika pengguna ditemukan dan password cocok
         if ($user && Hash::check($request->password, $user->password)) {
-            session(['user' => ['nim' => $user->nim, 'name' => $user->username]]);
+            session(['user' => ['nim' => $user->nim, 'name' => $user->username, 'role' => $user->role]]);
+            Log::info('Role user yang login:', ['role' => $user->role]);
             Log::info('Password match');
 
             try {
@@ -63,7 +64,12 @@ class AuthController extends Controller
                     session(['user_api' => $data['user']]);
                     Log::info('Token API diterima:', ['token' => $data['token']]);
 
-                    return redirect()->route('beranda')->with('success', 'Login berhasil!');
+                    if ($user->role === 'admin') {
+                        Log::info('Redirecting to admin route...');
+                        return redirect()->route('admin')->with('success', 'Login sebagai admin berhasil!');
+                    } else {
+                        return redirect()->route('beranda')->with('success', 'Login berhasil!');
+                    }
                 }
 
                 Log::error('API login gagal', ['response_parsed' => $data]);

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('nim')->unique();
+            $table->string('role')->default('student');
             $table->timestamps();
         });
 

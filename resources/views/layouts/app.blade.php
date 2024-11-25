@@ -25,7 +25,14 @@
 <body>
 
     <div class="app-wrapper">
-        @include('components.sidebar')
+        @if (session('user.role') === 'admin')
+            @include('components.sidebarAdmin')
+        @elseif(session('user.role') === 'student')
+            @include('components.sidebar')
+        @else
+            {{-- Optional: Fallback jika role tidak sesuai --}}
+            <p class="text-center text-danger">Role tidak dikenali.</p>
+        @endif
 
         <main>
             @yield('content')
