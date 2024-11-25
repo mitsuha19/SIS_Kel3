@@ -30,3 +30,4 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
 Route::middleware(['auth.session', 'role:admin'])->group(function () {
     Route::get('/beranda/admin', [adminController::class, 'index'])->name('admin');
 });
+
