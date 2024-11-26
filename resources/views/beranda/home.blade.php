@@ -28,25 +28,28 @@
                 </div>
 
                 <!-- Pengumuman -->
-                <!-- Pengumuman -->
                 <div class="col-md-6">
                     <div class="cards p-3">
                         <h5 class="border-bottom-line text-start">PENGUMUMAN</h5>
                         <ul class="list-unstyled text-start pengumuman">
                             @forelse ($pengumuman as $item)
                                 <li>
-                                    <strong
-                                        class="@switch($item->sumber)
-                        @case('BEM') text-primary @break
-                        @case('INFO') text-danger @break
-                        @case('BURSAR') text-info @break
-                        @case('KEASRAMAAN') text-success @break
-                        @case('KEMAHASISWAAN') text-purple @break
-                        @default text-dark
-                    @endswitch">
-                                        [{{ strtoupper($item->sumber) }}]
-                                    </strong>
-                                    {{ $item->judul }}
+                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal"
+                                        data-bs-target="#pengumumanModal" data-judul="{{ $item->judul }}"
+                                        data-deskripsi="{{ $item->deskripsi }}">
+                                        <strong
+                                            class="@switch($item->sumber)
+                                            @case('BEM') text-primary @break
+                                            @case('INFO') text-danger @break
+                                            @case('BURSAR') text-info @break
+                                            @case('KEASRAMAAN') text-success @break
+                                            @case('KEMAHASISWAAN') text-purple @break
+                                            @default text-dark
+                                        @endswitch">
+                                            [{{ strtoupper($item->sumber) }}]
+                                        </strong>
+                                        {{ $item->judul }}
+                                    </a>
                                 </li>
                             @empty
                                 <li class="text-muted">Belum ada pengumuman.</li>
@@ -54,7 +57,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
 
             <!-- Tombol Unduh Kalender -->
@@ -79,4 +81,50 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+
+    <!-- Modal untuk Deskripsi Pengumuman -->
+    <div class="modal fade" id="pengumumanModal" tabindex="-1" aria-labelledby="pengumumanModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pengumumanModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="pengumumanDeskripsi"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pengumumanModal = document.getElementById('pengumumanModal');
+            const modalTitle = document.getElementById('pengumumanModalLabel'); // Elemen judul modal
+            const modalBody = document.getElementById('pengumumanDeskripsi'); // Elemen deskripsi modal
+
+            pengumumanModal.addEventListener('show.bs.modal', function(event) {
+                // Elemen yang memicu modal
+                const button = event.relatedTarget;
+
+                // Ambil data dari atribut tombol
+                const judul = button.getAttribute('data-judul');
+                const deskripsi = button.getAttribute('data-deskripsi');
+
+                // Cetak nilai ke console setelah didefinisikan
+                console.log('Judul:', judul);
+                console.log('Deskripsi:', deskripsi);
+
+                // Masukkan data ke modal
+                modalTitle.textContent = judul;
+                modalBody.textContent = deskripsi;
+            });
+        });
+    </script>
+@endsection
