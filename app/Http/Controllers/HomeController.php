@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calendar;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -49,8 +50,11 @@ class HomeController extends Controller
                 Log::info('Data values:', $values);
 
                 $pengumuman = Pengumuman::orderBy('created_at', 'desc')->get();
+                $akademik = Calendar::where('type', 'akademik')->latest()->first();
+                $bem = Calendar::where('type', 'bem')->latest()->first();
 
-                return view('beranda.home', compact('labels', 'values', 'pengumuman'));
+
+                return view('beranda.home', compact('labels', 'values', 'pengumuman', 'akademik', 'bem'));
             }
 
             Log::error('Gagal mengambil data API', ['response' => $response->body()]);

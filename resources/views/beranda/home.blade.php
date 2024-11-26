@@ -60,10 +60,23 @@
             <!-- Tombol Unduh Kalender -->
             <div class="row mt-4">
                 <div class="col-md-12 text-center">
-                    <button class="btn btn-primary me-2">Unduh Kalender Akademik!</button>
-                    <button class="btn btn-primary">Unduh Kalender BEM!</button>
-                </div>
+                    @if ($akademik)
+                        <a href="{{ asset('storage/' . $akademik->file_path) }}" target="_blank"
+                            class="btn btn-primary me-2">
+                            Unduh Kalender Akademik!
+                        </a>
+                    @else
+                        <button class="btn btn-secondary me-2" disabled>Kalender Akademik Belum Tersedia</button>
+                    @endif
 
+                    @if ($bem)
+                        <a href="{{ asset('storage/' . $bem->file_path) }}" target="_blank" class="btn btn-primary">
+                            Unduh Kalender BEM!
+                        </a>
+                    @else
+                        <button class="btn btn-secondary" disabled>Kalender BEM Belum Tersedia</button>
+                    @endif
+                </div>
             </div>
         </div>
     @endsection

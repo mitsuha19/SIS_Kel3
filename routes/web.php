@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\CalendarController;
 
 // Login dan Logout
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
@@ -29,5 +30,8 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
 
 Route::middleware(['auth.session', 'role:admin'])->group(function () {
     Route::get('/beranda/admin', [adminController::class, 'index'])->name('admin');
-});
+    Route::post('/beranda/admin/store', [adminController::class, 'store'])->name('pengumuman.store');
+    Route::delete('/beranda/admin/{id}', [adminController::class, 'destroy'])->name('pengumuman.destroy');
 
+    Route::post('/calendar/upload', [CalendarController::class, 'upload'])->name('calendar.upload');
+});
