@@ -475,3 +475,31 @@ ul li {
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+/* Mengatur font untuk label */
+.form-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; /* Ukuran font */
+    font-weight: 500; /* Ketebalan font */
+    color: #333; /* Warna teks */
+    display: block; /* Agar label selalu tampil di atas elemen input */
+    margin-bottom: 8px; /* Spasi antara label dan elemen input */
+}
+
+.pengumuman li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: nowrap; /* Mencegah konten membungkus */
+}
+
+.pengumuman li span {
+    flex: 1; /* Membuat teks pengumuman menggunakan sisa ruang yang tersedia */
+    word-wrap: break-word; /* Memastikan teks panjang tidak meluap */
+}
+
+.pengumuman li .btn {
+    white-space: nowrap; /* Mencegah tombol membungkus */
+}
+

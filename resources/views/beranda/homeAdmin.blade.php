@@ -17,34 +17,35 @@
                 <div class="cards p-3">
                     <h5 class="border-bottom-line text-start">PENGUMUMAN</h5>
                     <ul class="list-unstyled text-start pengumuman">
-                        @forelse ($pengumuman as $item)
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span>
-                                    <strong
-                                        class="@switch($item->sumber)
-                                            @case('BEM') text-primary @break
-                                            @case('INFO') text-danger @break
-                                            @case('BURSAR') text-info @break
-                                            @case('KEASRAMAAN') text-success @break
-                                            @case('KEMAHASISWAAN') text-purple @break
-                                            @default text-dark
-                                        @endswitch">
-                                        [{{ strtoupper($item->sumber) }}]
-                                    </strong>
-                                    {{ $item->judul }}
-                                </span>
-                                <form method="POST" action="{{ route('pengumuman.destroy', $item->id) }}" class="ms-3">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus pengumuman ini?');">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </li>
-                        @empty
-                            <li class="text-muted">Belum ada pengumuman.</li>
-                        @endforelse
+                    @forelse ($pengumuman as $item)
+                    <li class="d-flex justify-content-between align-items-center mb-2">
+    <span>
+        <strong class="@switch($item->sumber)
+            @case('BEM') text-primary @break
+            @case('INFO') text-danger @break
+            @case('BURSAR') text-info @break
+            @case('KEASRAMAAN') text-success @break
+            @case('KEMAHASISWAAN') text-purple @break
+            @default text-dark
+        @endswitch">
+        [{{ strtoupper($item->sumber) }}]
+        </strong>
+        {{ $item->judul }}
+    </span>
+    <div class="ms-3">
+        <form method="POST" action="{{ route('pengumuman.destroy', $item->id) }}" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-link text-danger p-0" 
+                onclick="return confirm('Apakah Anda yakin ingin menghapus pengumuman ini?');" title="Hapus">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </form>
+    </div>
+</li>
+@empty
+    <li class="text-muted">Belum ada pengumuman.</li>
+@endforelse
                     </ul>
                 </div>
             </div>
