@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IBController;
+use App\Http\Controllers\IKController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
@@ -19,13 +21,15 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
     Route::view('/perkuliahan/jadwal', 'perkuliahan/jadwal')->name('jadwal');
     Route::view('/perkuliahan/kemajuan_studi', 'perkuliahan/kemajuan_studi')->name('kemajuan_studi');
     Route::view('/perkuliahan/prodi', 'perkuliahan/prodi')->name('prodi');
-    Route::view('/perizinan/izin_bermalam', 'perizinan/izin_bermalam')->name('izin_bermalam');
-    Route::view('/perizinan/izin_keluar', 'perizinan/izin_keluar')->name('izin_keluar');
     Route::view('/asrama', 'asrama/asrama')->name('asrama');
     Route::view('/catatan_perilaku', 'catatanPerilaku/catatan_perilaku')->name('catatan_perilaku');
 
     // Profil
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    //ib
+    Route::get('/perizinan/izin_bermalam', [IBController::class, 'index'])->name('izin_bermalam');
+    //ik
+    Route::get('/perizinan/izin_keluar', [IKController::class, 'index'])->name('izin_keluar');
 });
 
 Route::middleware(['auth.session', 'role:admin'])->group(function () {

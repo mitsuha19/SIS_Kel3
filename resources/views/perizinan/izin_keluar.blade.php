@@ -12,7 +12,13 @@
     <!-- Konten Utama -->
     <div class="app-content-header">
         <div class="container-fluid">
-            <h3 class="mb-4">Daftar Izin Keluar</h3>
+            <h4 class="mb-4">Daftar Izin Keluar</h4>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first() }}
+                </div>
+            @endif
 
             <!-- Tabel Daftar Izin Keluar -->
             <table class="table table-bordered">
@@ -21,57 +27,43 @@
                         <th>No</th>
                         <th>Tujuan Izin Keluar</th>
                         <th>Status Permohonan</th>
+                        <th>Rencana Berangkat</th>
+                        <th>Rencana Kembali</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mempercepat izin bermalam</td>
-                        <td>Menunggu Persetujuan BAAK</td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td>2</td>
-                        <td>Memperbaiki kacamata yang rusak</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Mempercepat izin bermalam</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr class="table-secondary">
-                        <td>4</td>
-                        <td>Perbaiki laptop ke Balige</td>
-                        <td>Ditolak</td>
-                    </tr>
+                    @forelse ($izinKeluar as $index => $izin)
+                        <tr class="{{ $loop->index % 2 === 1 ? 'table-secondary' : '' }}">
+                            <td>{{ $loop->iteration + ($currentPage - 1) * $perPage }}</td>
+                            <td>{{ $izin['deskripsi'] ?? 'N/A' }}</td>
+                            <td>{{ $izin['status_request'] ?? 'N/A' }}</td>
+                            <td>{{ isset($izin['rencana_berangkat']) ? \Carbon\Carbon::parse($izin['rencana_berangkat'])->format('d M Y H:i') : 'N/A' }}
+                            </td>
+                            <td>{{ isset($izin['rencana_kembali']) ? \Carbon\Carbon::parse($izin['rencana_kembali'])->format('d M Y H:i') : 'N/A' }}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">Belum ada data izin keluar.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
 
             <!-- Pagination -->
-<div class="d-flex justify-content-center mt-4">
-    <nav>
-        <ul class="pagination">
-            <!-- Tombol Sebelumnya -->
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Sebelumnya">
-                    &laquo;
-                </a>
-            </li>
-            <!-- Nomor Halaman -->
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><span class="page-link">2</span></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item disabled"><span class="page-link">...</span></li>
-            <li class="page-item"><a class="page-link" href="#">8</a></li>
-            <li class="page-item"><a class="page-link" href="#">9</a></li>
-            <li class="page-item"><a class="page-link" href="#">10</a></li>
-            <!-- Tombol Berikutnya -->
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Berikutnya">
-                    &raquo;
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
+            @if ($total > $perPage)
+                <div class="d-flex justify-content-center mt-4">
+                    <nav>
+                        <ul class="pagination">
+                            @for ($i = 1; $i <= ceil($total / $perPage); $i++)
+                                <li class="page-item {{ $i == $currentPage ? 'active' : '' }}">
+                                    <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                        </ul>
+                    </nav>
+                </div>
+            @endif
+        </div>
+    </div>
 @endsection
