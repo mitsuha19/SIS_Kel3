@@ -17,35 +17,37 @@
                 <div class="cards p-3">
                     <h5 class="border-bottom-line text-start">PENGUMUMAN</h5>
                     <ul class="list-unstyled text-start pengumuman">
-                    @forelse ($pengumuman as $item)
-                    <li class="d-flex justify-content-between align-items-center mb-2">
-    <span>
-        <strong class="@switch($item->sumber)
-            @case('BEM') text-primary @break
-            @case('INFO') text-danger @break
-            @case('BURSAR') text-info @break
-            @case('KEASRAMAAN') text-success @break
-            @case('KEMAHASISWAAN') text-purple @break
-            @default text-dark
-        @endswitch">
-        [{{ strtoupper($item->sumber) }}]
-        </strong>
-        {{ $item->judul }}
-    </span>
-    <div class="ms-3">
-        <form method="POST" action="{{ route('pengumuman.destroy', $item->id) }}" class="d-inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-link text-danger p-0" 
-                onclick="return confirm('Apakah Anda yakin ingin menghapus pengumuman ini?');" title="Hapus">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        </form>
-    </div>
-</li>
-@empty
-    <li class="text-muted">Belum ada pengumuman.</li>
-@endforelse
+                        @forelse ($pengumuman as $item)
+                            <li class="d-flex justify-content-between align-items-center mb-2">
+                                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#pengumumanModal" data-judul="{{ $item->judul }}" data-deskripsi="{{ $item->deskripsi }}">
+                                    <span>
+                                        <strong class="@switch($item->sumber)
+                                            @case('BEM') text-primary @break
+                                            @case('INFO') text-danger @break
+                                            @case('BURSAR') text-info @break
+                                            @case('KEASRAMAAN') text-success @break
+                                            @case('KEMAHASISWAAN') text-purple @break
+                                            @default text-dark
+                                        @endswitch">
+                                        [{{ strtoupper($item->sumber) }}]
+                                        </strong>
+                                        {{ $item->judul }}
+                                    </span>
+                                </a>
+                                <div class="ms-3">
+                                    <form method="POST" action="{{ route('pengumuman.destroy', $item->id) }}" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link text-danger p-0" 
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus pengumuman ini?');" title="Hapus">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
+                        @empty
+                            <li class="text-muted">Belum ada pengumuman.</li>
+                        @endforelse
                     </ul>
                 </div>
             </div>
@@ -134,7 +136,6 @@
     </div>
 
     <!-- Modal Unggah Pengumuman -->
-    <!-- Modal Unggah Pengumuman -->
     <div class="modal fade" id="modalPengumuman" tabindex="-1" aria-labelledby="modalPengumumanLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -176,36 +177,55 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal untuk Deskripsi Pengumuman -->
+    <div class="modal fade" id="pengumumanModal" tabindex="-1" aria-labelledby="pengumumanModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pengumumanModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="pengumumanDeskripsi"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
-    <script>
-        document.getElementById('uploadPengumuman').addEventListener('click', function() {
-            // Ambil nilai sumber, judul, dan deskripsi
-            const sumber = document.getElementById('sumberPengumuman').value;
-            const judul = document.getElementById('judulPengumuman').value;
-            const deskripsi = document.getElementById('deskripsiPengumuman').value;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pengumumanModal = document.getElementById('pengumumanModal');
+        const modalTitle = document.getElementById('pengumumanModalLabel'); // Elemen judul modal
+        const modalBody = document.getElementById('pengumumanDeskripsi'); // Elemen deskripsi modal
 
-            // Validasi input
-            if (sumber.trim() === "" || judul.trim() === "" || deskripsi.trim() === "") {
-                alert('Semua bidang harus diisi!');
-                return;
-            }
+        pengumumanModal.addEventListener('show.bs.modal', function(event) {
+            // Elemen yang memicu modal
+            const button = event.relatedTarget;
 
-            // Tambahkan pengumuman ke daftar (simulasi update frontend)
-            const ul = document.querySelector('ul');
-            const li = document.createElement('li');
-            li.innerHTML = `<span class="text-primary">[${sumber.toUpperCase()}]</span> ${judul} - ${deskripsi}`;
-            ul.appendChild(li);
+            // Ambil data dari atribut tombol
+            const judul = button.getAttribute('data-judul');
+            const deskripsi = button.getAttribute('data-deskripsi');
 
-            // Reset form
-            document.getElementById('sumberPengumuman').value = '';
-            document.getElementById('judulPengumuman').value = '';
-            document.getElementById('deskripsiPengumuman').value = '';
+            // Cetak nilai ke console setelah didefinisikan
+            console.log('Judul:', judul);
+            console.log('Deskripsi:', deskripsi);
 
-            // Tutup modal
-            const modalPengumuman = new bootstrap.Modal(document.getElementById('modalPengumuman'));
-            modalPengumuman.hide();
+            // Masukkan data ke modal
+            modalTitle.textContent = judul;
+            modalBody.textContent = deskripsi;
         });
-    </script>
+    });
+</script>
+
+@section('styles')
+<style>
+    #pengumumanModal .modal-content {
+        width: 50%;
+        margin: 30px auto;
+    }
+</style>
 @endsection
