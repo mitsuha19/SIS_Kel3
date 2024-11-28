@@ -19,66 +19,96 @@
 
     <!-- Riwayat Tagihan -->
     <div class="card-header bg-white mt-5 mb-4">
-        <h4 class="text-start"><i class= "fas fa-history me-2"></i> History Tagihan</h4>
-        <h5 class=" text-start"><i class="fas fa-lock me-2"></i> CLOSED: Closed Payment, VER: Verified, VWC: Verified With
-            Credit, POS: Postponed, </h5>
-        <h5 class=" text-start"> NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit </h5>
+        <h4 class="text-start"><i class="fas fa-history me-2"></i> History Tagihan</h4>
+        <h5 class="text-start"><i class="fas fa-lock me-2"></i> CLOSED: Closed Payment, VER: Verified, VWC: Verified With
+            Credit, POS: Postponed</h5>
+        <h5 class="text-start"> NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit</h5>
     </div>
     <div class="card-body">
         <table class="table table-bordered">
             <thead class="table-light">
                 <tr>
                     <th>#</th>
-                    <th>Payment Periode</th>
-                    <th>Tagihan (Rp.)</th>
-                    <th>Hutang (Rp.)</th>
-                    <th>Total (Rp.)</th>
+                    <th>Periode</th>
+                    <th>Nominal Minimum (Rp.)</th>
+                    <th>Voucher (Rp.)</th>
+                    <th>Total Nominal (Rp.)</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Data Dummy -->
-                <tr>
-                    <td>1</td>
-                    <td>2024/Gasal/November</td>
-                    <td>2,187,500.00</td>
-                    <td>-</td>
-                    <td>2,187,500.00</td>
-                    <td>VER</td>
-                    <td>
-                        <button class="btn btn-sm btn-secondary">
-                            <i class="fas fa-info-circle"></i> <small> Details </small>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2024/Gasal/Oktober</td>
-                    <td>2,187,500.00</td>
-                    <td>-</td>
-                    <td>2,187,500.00</td>
-                    <td>VER</td>
-                    <td>
-                        <button class="btn btn-sm btn-secondary">
-                            <i class="fas fa-info-circle"></i> <small> Details </small>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>2024/Gasal/September</td>
-                    <td>2,187,500.00</td>
-                    <td>-</td>
-                    <td>2,187,500.00</td>
-                    <td>VER</td>
-                    <td>
-                        <button class="btn btn-sm btn-secondary">
-                            <i class="fas fa-info-circle"></i> <small> Details </small>
-                        </button>
-                    </td>
-                </tr>
+                @forelse ($bursarData as $index => $item)
+                    <tr class="{{ $index % 2 === 1 ? 'table-secondary' : '' }}">
+                        <td>{{ ($currentPage - 1) * $perPage + $index + 1 }}</td>
+                        <td>{{ $item['periode'] ?? '-' }}</td>
+                        <td>{{ number_format($item['nominal_minimum'] ?? 0, 2, ',', '.') }}</td>
+                        <td>{{ number_format($item['voucher'] ?? 0, 2, ',', '.') }}</td>
+                        <td>{{ number_format($item['total_nominal'] ?? 0, 2, ',', '.') }}</td>
+                        <td>{{ $item['status'] ?? 'N/A' }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#detailModal{{ $index }}">
+                                <i class="fas fa-info-circle"></i> <small> Details </small>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Modal untuk Detail -->
+                    <div class="modal fade" id="detailModal{{ $index }}" tabindex="-1"
+                        aria-labelledby="detailModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="detailModalLabel">Detail Tagihan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Periode:</strong> {{ $item['periode'] ?? '-' }}</p>
+                                    <p><strong>Tanggal Pembayaran:</strong> {{ $item['tanggal_pembayaran'] ?? '-' }}</p>
+                                    <p><strong>Nominal Dibayarkan:</strong>
+                                        {{ number_format($item['nominal_dibayarkan'] ?? 0, 2, ',', '.') }}</p>
+                                    <h6>Detail Biaya:</h6>
+                                    <ul>
+                                        @forelse ($item['detail'] as $detail)
+                                            <li>{{ $detail['nama_biaya'] ?? '-' }}: Rp.
+                                                {{ number_format($detail['nominal_dibayarkan'] ?? 0, 2, ',', '.') }}</li>
+                                        @empty
+                                            <li class="text-muted">Tidak ada detail biaya.</li>
+                                        @endforelse
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">Belum ada data bursar.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+            @php
+                $totalPages = ceil($total / $perPage);
+            @endphp
+            <nav>
+                <ul class="pagination">
+                    @for ($page = 1; $page <= $totalPages; $page++)
+                        <li class="page-item {{ $page == $currentPage ? 'active' : '' }}">
+                            <a class="page-link" href="{{ request()->fullUrlWithQuery(['page' => $page]) }}">
+                                {{ $page }}
+                            </a>
+                        </li>
+                    @endfor
+                </ul>
+            </nav>
+        </div>
     </div>
 @endsection
