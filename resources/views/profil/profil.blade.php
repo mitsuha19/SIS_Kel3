@@ -29,9 +29,11 @@
                         <li><strong>Nama:</strong> {{ $student['nama'] ?? 'Data Tidak Ditemukan' }}</li>
                         <li><strong>Email:</strong> {{ $student['email'] ?? 'Data Tidak Ditemukan' }}</li>
                         <li><strong>HP:</strong> {{ $student['hp'] ?? 'Data Tidak Ditemukan' }}</li>
+                        <li><strong>Semester:</strong> {{ $student['sem'] ?? 'Data Tidak Ditemukan' }}</li>
                         <li><strong>Prodi:</strong> {{ $student['prodi'] ?? 'Data Tidak Ditemukan' }}</li>
                         <li><strong>Fakultas:</strong> {{ $student['fakultas'] ?? 'Data Tidak Ditemukan' }}</li>
                         <li><strong>Asrama:</strong> {{ $student['asrama'] ?? 'Data Tidak Ditemukan' }}</li>
+
                     </ul>
                 </div>
 

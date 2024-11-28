@@ -17,6 +17,22 @@ class HomeController extends Controller
         $apiToken = session('api_token');
 
         try {
+
+            $studentResponse = Http::withToken($apiToken)
+                ->withOptions(['verify' => false])
+                ->get('https://cis-dev.del.ac.id/api/library-api/get-student-by-nim', [
+                    'nim' => $nim,
+                ]);
+
+            if ($studentResponse->successful()) {
+                $studentData = $studentResponse->json()['data'] ?? [];
+
+                // Simpan sem_ta dan ta ke session
+                session([
+                    'sem_ta' => $studentData['sem_ta'] ?? null,
+                    'ta' => $studentData['ta'] ?? null,
+                ]);
+            }
             $response = Http::withToken($apiToken)
                 ->withOptions(['verify' => false]) // Abaikan verifikasi SSL
                 ->get('https://cis-dev.del.ac.id/api/library-api/get-penilaian', [

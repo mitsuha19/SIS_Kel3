@@ -1,4 +1,4 @@
-@extends('layouts.app') <!-- Layout utama -->
+@extends('layouts.app')
 
 @section('content')
     <!-- Header -->
@@ -9,8 +9,8 @@
         </a>
     </div>
 
-        <!-- Konten Utama -->
-        <div class="app-content-header">
+    <!-- Konten Utama -->
+    <div class="app-content-header">
         <div class="container-fluid">
             <h4 class="mb-5">Jadwal Perkuliahan Mahasiswa</h4>
         </div>
@@ -21,95 +21,29 @@
             <thead class="table-light">
                 <tr>
                     <th>Jam</th>
-                    <th>Senin</th>
-                    <th>Selasa</th>
-                    <th>Rabu</th>
-                    <th>Kamis</th>
-                    <th>Jumat</th>
+                    @foreach ($jadwalFormatted['days'] as $day)
+                        <th>{{ $day }}</th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
-                <!-- Data Dummy -->
-                <tr>
-                    <td>08.00</td>
-                    <td class="matkul">PPMPL</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>09.00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>10.00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>11.00</td>
-                    <td class="matkul"> CERTAN </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>12.00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>13.00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>14.00</td>
-                    <td class="matkul"> APPL </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>15.00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>16.00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>17.00</td>
-                    <td></td>
-                    <td></td>
-                    <td class="matkul">KRIPTO</class=></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($jadwalFormatted['times'] as $time)
+                    <tr>
+                        <td>{{ $time }}</td>
+                        @foreach ($jadwalFormatted['days'] as $key => $day)
+                            <td class="{{ !empty($jadwalFormatted['schedule'][$time][$key]) ? 'matkul' : '' }}">
+                                @if (!empty($jadwalFormatted['schedule'][$time][$key]))
+                                    @foreach ($jadwalFormatted['schedule'][$time][$key] as $matkul)
+                                        <div>{{ $matkul }}</div>
+                                    @endforeach
+                                @else
+                                    <!-- Jika kosong, kotak tetap tampil tapi tidak ada konten -->
+                                    <div>&nbsp;</div>
+                                @endif
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

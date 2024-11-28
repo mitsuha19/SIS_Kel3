@@ -6,9 +6,11 @@ use App\Http\Controllers\IKController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\AsramaController;
 use App\Http\Controllers\BursarController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\JadwalController;
 
 // Login dan Logout
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
@@ -18,10 +20,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Middleware untuk akses yang memerlukan autentikasi
 Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->group(function () {
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
-    Route::view('/perkuliahan/jadwal', 'perkuliahan/jadwal')->name('jadwal');
     Route::view('/perkuliahan/kemajuan_studi', 'perkuliahan/kemajuan_studi')->name('kemajuan_studi');
     Route::view('/perkuliahan/prodi', 'perkuliahan/prodi')->name('prodi');
-    Route::view('/asrama', 'asrama/asrama')->name('asrama');
     Route::view('/catatan_perilaku', 'catatanPerilaku/catatan_perilaku')->name('catatan_perilaku');
 
     // Profil
@@ -32,6 +32,11 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
     Route::get('/perizinan/izin_keluar', [IKController::class, 'index'])->name('izin_keluar');
     //bursar
     Route::get('bursar/bursar', [BursarController::class, 'index'])->name('bursar');
+    //asrama
+    Route::get('asrama/asrama', [AsramaController::class, 'index'])->name('asrama');
+
+    //jadwal
+    Route::get('perkuliahan/jadwal', [JadwalController::class, 'index'])->name('jadwal');
 });
 
 Route::middleware(['auth.session', 'role:admin'])->group(function () {

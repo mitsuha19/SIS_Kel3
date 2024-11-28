@@ -23,15 +23,11 @@
                         <tbody>
                             <tr>
                                 <th>ASRAMA</th>
-                                <td>Nazareth, Luar Kampus/Pintubosi</td>
+                                <td>{{ $asramaData['asrama'] ?? 'Tidak Diketahui' }}</td>
                             </tr>
                             <tr>
                                 <th>PENGURUS ASRAMA</th>
-                                <td>
-                                    - Pdt. Irinto Sitorus, S.Th. <br>
-                                    - Pdt. Begawan Johannes Sitompul, S.Th. <br>
-                                    - Pdt. Herman Manurung, S.Th.
-                                </td>
+                                <td>{{ $pembinaAsrama }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -45,15 +41,18 @@
                         <tbody>
                             <tr>
                                 <th>Kamar</th>
-                                <td>Kamar, 1 Lantai 4</td>
+                                <td>Kamar {{ $asramaData['kamar'] ?? '-' }}</td>
                             </tr>
                             <tr>
                                 <th>Teman Sekamar</th>
                                 <td>
-                                    - Christian Theofani Napitupulu (2022), S1 Informatika <br>
-                                    - Yisrael Schwartz Sijabat (2022), S1 Informatika <br>
-                                    - Wesly Beretta Siahaan (2022), S1 Informatika <br>
-                                    - Herrmon Rantua Sihombing (2022), S1 Informatika
+                                    @if (!empty($asramaData['teman_sekamar']))
+                                        @foreach ($asramaData['teman_sekamar'] as $teman)
+                                            - {{ $teman['nama'] ?? '-' }} ({{ $teman['nim'] ?? '-' }}) <br>
+                                        @endforeach
+                                    @else
+                                        <span class="text-muted">Tidak ada teman sekamar.</span>
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>
