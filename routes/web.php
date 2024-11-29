@@ -11,6 +11,7 @@ use App\Http\Controllers\BursarController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\ProdiController;
 
 // Login dan Logout
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
@@ -21,7 +22,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->group(function () {
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     Route::view('/perkuliahan/kemajuan_studi', 'perkuliahan/kemajuan_studi')->name('kemajuan_studi');
-    Route::view('/perkuliahan/prodi', 'perkuliahan/prodi')->name('prodi');
     Route::view('/catatan_perilaku', 'catatanPerilaku/catatan_perilaku')->name('catatan_perilaku');
 
     // Profil
@@ -35,6 +35,8 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
     //asrama
     Route::get('asrama/asrama', [AsramaController::class, 'index'])->name('asrama');
 
+    //prodi
+    Route::get('perkuliahan/prodi', [ProdiController::class, 'index'])->name('prodi');
     //jadwal
     Route::get('perkuliahan/jadwal', [JadwalController::class, 'index'])->name('jadwal');
 });

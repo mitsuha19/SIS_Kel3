@@ -28,8 +28,6 @@ class AuthController extends Controller
         Log::info('Input Password:', ['input' => $request->password]);
         Log::info('Hashed Password in DB:', ['hashed' => $user->password]);
 
-
-
         // Jika pengguna ditemukan dan password cocok
         if ($user && Hash::check($request->password, $user->password)) {
             session(['user' => ['nim' => $user->nim, 'name' => $user->username, 'role' => $user->role]]);
