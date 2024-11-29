@@ -9,10 +9,15 @@
         </a>
     </div>
 
-    <div class=" d-flex mb-4 text-start">
+    <div class="d-flex mb-4 text-start">
         <div class="me-auto">
-            <h4 class="mb-2">Tagihan Terbaru</h4>
-            <button class="btn btn-primary custom-btn mb-5">Semua Tagihan Sudah Diproses</button>
+            <h4 class="mb-3">Tagihan Terbaru</h4>
+            <!-- Card untuk Tagihan -->
+            <div class="card border-0 shadow-sm" style="background-color: #50C2E3; max-width: 350px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-0 custom-title">Semua Tagihan Sudah Diproses</h5>
+                </div>
+            </div>
         </div>
         <h5 class="va-text mb-5">VA (Bank Mandiri) 8823 3111 1722 036</h5>
     </div>
@@ -20,9 +25,7 @@
     <!-- Riwayat Tagihan -->
     <div class="card-header bg-white mt-5 mb-4">
         <h4 class="text-start"><i class="fas fa-history me-2"></i> History Tagihan</h4>
-        <h5 class="text-start"><i class="fas fa-lock me-2"></i> CLOSED: Closed Payment, VER: Verified, VWC: Verified With
-            Credit, POS: Postponed</h5>
-        <h5 class="text-start"> NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit</h5>
+        <h5 class="text-start"><i class="fas fa-lock me-2"></i>Closed Payment VER: Verified, VWC: Verified With Credit, POS: Postponed, NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit</h5>
     </div>
     <div class="card-body">
         <table class="table table-bordered">

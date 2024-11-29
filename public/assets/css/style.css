@@ -257,6 +257,8 @@ main {
 body {
     display: flex;
     flex-direction: row;
+    /* Menambahkan font Poppins untuk seluruh body */
+    font-family: 'Poppins', sans-serif;
 }
 
 .profile-section {
@@ -501,6 +503,45 @@ ul li {
 
 .pengumuman li .btn {
     white-space: nowrap; /* Mencegah tombol membungkus */
+}
+
+.custom-title {
+    color: white;
+}
+
+    .breadcrumb {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .border-bottom {
+        border-bottom: 2px solid #000;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .table a {
+        font-weight: bold;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #dee2e6;
+    }
+
+    /* Mengatur posisi judul 'Absensi Mahasiswa' ke kiri */
+h3 {
+    text-align: left;  /* Mengatur teks agar rata kiri */
+    margin-top: 20px; 
 }
 
 

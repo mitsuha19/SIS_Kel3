@@ -1,19 +1,26 @@
-@extends('layouts.app') <!-- Layout utama -->
+@extends('layouts.app')
 
 @section('content')
-    <!-- Header -->
-    <div class="d-flex align-items-center mb-4 border-bottom-line">
-        <h3 class="me-auto">Home / Perkuliahan / Absensi Mahasiswa</h3>
-        <a href="{{ route('logout') }}">
-            <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
-        </a>
+
+<div class="container mt-4">
+    <!-- Breadcrumb -->
+    <div class="mb-4">
+        <h5 class="mb-2 text-start">
+            <span class="text-muted">Home</span> / 
+            <span class="text-muted">Perkuliahan</span> / 
+            <span class="fw-bold">Absensi Mahasiswa</span>
+        </h5>
+        <!-- Garis Bawah -->
+        <hr class="mt-0">
     </div>
 
-    <!-- Konten Utama -->
-    <div class="container mt-4">
-        <h3 class="mb-4">Daftar Absensi</h3>
-        <table class="table table-bordered">
-            <thead>
+    <!-- Judul Halaman -->
+    <h3 class="fw-bold border-bottom pb-2">Absensi Mahasiswa</h3>
+
+    <!-- Tabel -->
+    <div class="mt-5">
+        <table class="table table-hover table-bordered align-middle" style="width: 80%; margin: 0 auto;">
+            <thead class="table-primary">
                 <tr>
                     <th>#</th>
                     <th>Kode Matakuliah</th>
@@ -28,15 +35,17 @@
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $attendance['kode_mk'] }}</td>
                         <td>
-                            <a href="{{ route('absensi.detail', $attendance['kode_mk']) }}" class="text-primary">
+                            <a href="{{ route('absensi.detail', $attendance['kode_mk']) }}" class="text-decoration-none text-primary">
                                 {{ $attendance['nama_mk'] }}
                             </a>
                         </td>
                         <td>{{ $attendance['sks'] }}</td>
-                        <td>{{ $attendance['attendance_percentage'] }}%</td>
+                        <td>{{ number_format($attendance['attendance_percentage'], 2) }}%</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+</div>
+
 @endsection
