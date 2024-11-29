@@ -49,6 +49,11 @@
                 </a>
             </li>
             <li class="submenu-item">
+                <a href="{{ route('absensi') }}">
+                    <i class="fas fa-chart-line"></i> Absensi Mahasiswa
+                </a>
+            </li>
+            <li class="submenu-item">
                 <a href="{{ route('kemajuan_studi') }}">
                     <i class="fas fa-chart-line"></i> Kemajuan Studi
                 </a>
