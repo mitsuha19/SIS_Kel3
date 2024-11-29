@@ -13,6 +13,12 @@
     <div class="app-content-header">
         <div class="container-fluid">
             <h4 class="mb-4">Daftar Izin Keluar</h4>
+            <!-- Menambahkan jumlah izin bermalam dengan format Showing 1-10 of x items -->
+            @php
+                $startItem = ($currentPage - 1) * $perPage + 1;
+                $endItem = min($currentPage * $perPage, $total);
+            @endphp
+            <p>Showing {{ $startItem }}-{{ $endItem }} of {{ $total }} items</p>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
