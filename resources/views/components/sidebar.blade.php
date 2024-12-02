@@ -50,7 +50,7 @@
             </li>
             <li class="submenu-item">
                 <a href="{{ route('absensi') }}">
-                    <i class="fas fa-chart-line"></i> Absensi Mahasiswa
+                <i class="fas fa-address-card"></i> Absensi Mahasiswa
                 </a>
             </li>
             <li class="submenu-item">
