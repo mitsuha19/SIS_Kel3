@@ -15,7 +15,6 @@
     <div class="welcome-section">
       <img src="{{ asset('assets/img/Logo Institut Teknologi Del.png') }}" alt="Del Logo">
       <div class="welcome-content">
-
         <p class="welcome-text">Selamat Datang,</p>
         <div class="container-sis">
           <p class="welcome-text">Di</p>
@@ -28,10 +27,13 @@
     <!-- Login Section -->
     <div class="login-section">
       <p class="login-heading">SIS</p>
-      <p style="text-align: center; color: #ffffff; margin-bottom: 20px; margin-top: -1rem;">Student Information System
+      <p style="text-align: center; color: #ffffff; margin-bottom: 20px; margin-top: -1rem;">
+        Student Information System
       </p>
+
       <form action="{{ route('login.submit') }}" method="POST">
         @csrf
+        <!-- Input NIM -->
         <div class="form-group">
           <label for="nim">NIM</label>
           <div class="input-wrapper">
@@ -39,13 +41,24 @@
             <i class="fas fa-user"></i>
           </div>
         </div>
+
+        <!-- Input Password -->
         <div class="form-group">
           <label for="password">Password</label>
           <div class="input-wrapper">
             <input type="password" id="password" name="password" placeholder="*******" required>
             <i class="fas fa-lock"></i>
           </div>
+
+          <!-- Pesan Kesalahan -->
+          @if (session('error'))
+          <p style="color: red; font-size: 14px; margin-top: 8px;">
+            Incorrect username or password
+          </p>
+          @endif
         </div>
+
+        <!-- Tombol Login -->
         <center>
           <button type="submit" class="btn">Login</button>
         </center>
