@@ -5,7 +5,11 @@
 <div class="container mt-4">
         <!-- Breadcrumb -->
         <div class="d-flex align-items-center mb-4 border-bottom">
-        <h3 class="me-auto">Home / Perkuliahan / Detail Absensi Mahasiswa</h3>
+        <h3 class="me-auto">
+        <a href="{{ route('beranda') }}">Home</a> /
+        <a href="{{ route('absensi.detail') }}">Perkuliahan</a>
+        <a href="{{ route('absensi.detail') }}">Detail Absensi</a>
+        </h3>
         <a href="#" onclick="confirmLogout()" class="ms-auto">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>

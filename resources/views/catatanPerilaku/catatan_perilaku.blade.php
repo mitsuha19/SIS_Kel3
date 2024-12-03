@@ -3,7 +3,10 @@
 @section('content')
     <!-- Header -->
     <div class="d-flex align-items-center mb-4 border-bottom">
-        <h3 class="me-auto">Home / Catatan Perilaku</h3>
+    <h3 class="me-auto">
+        <a href="{{ route('beranda') }}">Home</a> /
+        <a href="{{ route('catatan_perilaku') }}">Catatan Perilaku</a>
+        </h3>
         <a href="{{ route('logout') }}"><a href="#" onclick="confirmLogout()">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>

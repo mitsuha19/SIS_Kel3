@@ -3,7 +3,11 @@
 @section('content')
     <!-- Breadcrumb dan Header -->
     <div class="d-flex align-items-center mb-4 border-bottom">
-        <h3 class="me-auto">Home / Perizinan / Izin Keluar</h3>
+    <h3 class="me-auto">
+        <a href="{{ route('beranda') }}">Home</a> /
+        <a href="{{ route('izin_bermalam') }}">Perizinan</a> /
+        <a href="{{ route('izin_keluar') }}">Izin Keluar</a>
+        </h3>
         <a href="{{ route('logout') }}"><a href="#" onclick="confirmLogout()">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>

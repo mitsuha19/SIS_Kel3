@@ -544,4 +544,14 @@ h3 {
     margin-top: 20px; 
 }
 
+/* Mengatur warna tautan menjadi hitam dan menghapus garis bawah */
+h3.me-auto a {
+    color: #000; /* Warna hitam */
+    text-decoration: none; /* Menghapus garis bawah */
+}
 
+/* Efek hover opsional untuk tautan */
+h3.me-auto a:hover {
+    color: #555; /* Warna abu-abu gelap saat di-hover */
+    text-decoration: none; /* Tetap tanpa garis bawah saat hover */
+}
