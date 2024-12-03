@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use App\Models\User;
 
@@ -23,27 +23,19 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Coba autentikasi menggunakan Auth::attempt
-        $credentials = $request->only('nim', 'password');
+        $user = User::where('nim', $request->nim)->first();
+        Log::info('Input Password:', ['input' => $request->password]);
+        Log::info('Hashed Password in DB:', ['hashed' => $user->password]);
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user(); // Dapatkan user yang sedang login
-
-            session([
-                'user' => [
-                    'nim' => $user->nim,
-                    'name' => $user->username,
-                    'role' => $user->role,
-                ]
-            ]);
+        if ($user && Hash::check($request->password, $user->password)) {
+            session(['user' => ['nim' => $user->nim, 'name' => $user->username, 'role' => $user->role]]);
+            Log::info('Role user yang login:', ['role' => $user->role]);
+            Log::info('Password match');
             Log::info('Login berhasil untuk user:', ['nim' => $user->nim, 'role' => $user->role]);
-
-            // Flash message sukses login
-            $request->session()->flash('success', 'Login berhasil! Selamat datang di Student Information System.');
 
             try {
                 Log::info('Mengirim permintaan API eksternal...');
-                $client = new Client(['verify' => false]);
+                $client = new \GuzzleHttp\Client(['verify' => false]);
 
                 $response = $client->post('https://cis-dev.del.ac.id/api/jwt-api/do-auth', [
                     'form_params' => [
@@ -53,6 +45,7 @@ class AuthController extends Controller
                     'headers' => [
                         'Accept' => 'application/json',
                     ],
+                    'stream' => true,
                     'timeout' => 60,
                 ]);
 
@@ -68,6 +61,7 @@ class AuthController extends Controller
                     Log::info('Token API diterima:', ['token' => $data['token']]);
 
                     if ($user->role === 'admin') {
+                        Log::info('Redirecting to admin route...');
                         return redirect()->route('admin')->with('success', 'Login sebagai admin berhasil!');
                     } else {
                         return redirect()->route('beranda')->with('success', 'Login berhasil!');
@@ -83,7 +77,7 @@ class AuthController extends Controller
         }
 
         // Jika autentikasi gagal
-        return redirect()->back()->with('error', 'NIM atau password salah');
+        return back()->withErrors(['login' => 'NIM atau Password salah.']);
     }
 
     public function logout()

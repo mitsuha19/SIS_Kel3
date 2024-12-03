@@ -80,4 +80,13 @@ class HomeController extends Controller
             return redirect()->route('beranda')->withErrors(['error' => 'Terjadi kesalahan saat memuat data.']);
         }
     }
+
+    public function show($id)
+    {
+        // Ambil pengumuman berdasarkan ID
+        $pengumuman = Pengumuman::findOrFail($id);
+
+        // Kembalikan ke view dengan pengumuman yang ditemukan
+        return view('beranda.detailpengumuman', compact('pengumuman'));
+    }
 }

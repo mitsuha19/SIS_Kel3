@@ -22,6 +22,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Middleware untuk akses yang memerlukan autentikasi
 Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->group(function () {
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
+    Route::get('/pengumuman/{id}', [HomeController::class, 'show'])->name('pengumuman.detail');
     Route::view('/perkuliahan/kemajuan_studi', 'perkuliahan/kemajuan_studi')->name('kemajuan_studi');
     Route::view('/catatan_perilaku', 'catatanPerilaku/catatan_perilaku')->name('catatan_perilaku');
 
@@ -49,6 +50,7 @@ Route::middleware(['auth.session', 'role:admin'])->group(function () {
     Route::get('/beranda/admin', [adminController::class, 'index'])->name('admin');
     Route::post('/beranda/admin/store', [adminController::class, 'store'])->name('pengumuman.store');
     Route::delete('/beranda/admin/{id}', [adminController::class, 'destroy'])->name('pengumuman.destroy');
+    Route::get('/pengumuman/admin/{id}', [adminController::class, 'show'])->name('pengumumanadmin.detail');
 
     Route::post('/calendar/upload', [CalendarController::class, 'upload'])->name('calendar.upload');
 });

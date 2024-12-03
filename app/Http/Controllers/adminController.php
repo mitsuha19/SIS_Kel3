@@ -42,4 +42,14 @@ class adminController extends Controller
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menghapus pengumuman.']);
         }
     }
+
+
+    public function show($id)
+    {
+        // Ambil pengumuman berdasarkan ID
+        $pengumuman = Pengumuman::findOrFail($id);
+
+        // Kembalikan ke view dengan pengumuman yang ditemukan
+        return view('beranda.detailpengumuman', compact('pengumuman'));
+    }
 }
