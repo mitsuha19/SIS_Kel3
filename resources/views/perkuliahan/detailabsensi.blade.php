@@ -4,14 +4,11 @@
 
 <div class="container mt-4">
         <!-- Breadcrumb -->
-        <div class="mb-4">
-            <h5 class="mb-2 text-start">
-                <span class="text-muted">Home</span> / 
-                <span class="text-muted">Perkuliahan</span> / 
-                <span class="fw-bold">Absensi Mahasiswa</span>
-            </h5>
-            <!-- Garis Bawah -->
-            <hr class="mt-0">
+        <div class="d-flex align-items-center mb-4 border-bottom">
+        <h3 class="me-auto">Home / Perkuliahan / Detail Absensi Mahasiswa</h3>
+        <a href="#" onclick="confirmLogout()" class="ms-auto">
+            <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+        </a>
         </div>
         
         <div class="container mt-4">
@@ -51,4 +48,23 @@
         </table>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Apakah anda yakin ingin keluar?',
+            text: "Anda akan keluar dari akun ini.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, keluar!',
+            cancelButtonText: 'Tidak',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '{{ route('logout') }}';  // Arahkan ke route logout jika 'Ya' dipilih
+            }
+        });
+    }
+</script>
 @endsection
