@@ -3,12 +3,12 @@
 @section('content')
     <!-- Header -->
     <div class="d-flex align-items-center mb-4 border-bottom-line">
-    <h3 class="me-auto">
-        <a href="{{ route('beranda') }}">Home</a>
+        <h3 class="me-auto">
+            <a href="{{ route('beranda') }}">Home</a>
         </h3>
         <a href="{{ route('logout') }}"><a href="#" onclick="confirmLogout()">
-        <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
-        </a>
+                <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+            </a>
     </div>
 
     <!-- Konten Utama -->
@@ -36,7 +36,7 @@
                         <ul class="list-unstyled text-start pengumuman">
                             @forelse ($pengumuman as $item)
                                 <li>
-                                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#pengumumanModal" data-judul="{{ $item->judul }}" data-deskripsi="{{ $item->deskripsi }}">
+                                    <a href="{{ route('pengumuman.detail', $item->id) }}" class="text-decoration-none">
                                         <strong
                                             class="@switch($item->sumber)
                                             @case('BEM') text-primary @break
@@ -85,49 +85,49 @@
 
     <!-- Modal untuk Deskripsi Pengumuman -->
     <div class="modal fade" id="pengumumanModal" tabindex="-1" aria-labelledby="pengumumanModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pengumumanModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="pengumumanDeskripsi"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pengumumanModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="pengumumanDeskripsi"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const pengumumanModal = document.getElementById('pengumumanModal');
-        const modalTitle = document.getElementById('pengumumanModalLabel'); // Elemen judul modal
-        const modalBody = document.getElementById('pengumumanDeskripsi'); // Elemen deskripsi modal
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pengumumanModal = document.getElementById('pengumumanModal');
+            const modalTitle = document.getElementById('pengumumanModalLabel'); // Elemen judul modal
+            const modalBody = document.getElementById('pengumumanDeskripsi'); // Elemen deskripsi modal
 
-        pengumumanModal.addEventListener('show.bs.modal', function(event) {
-            // Elemen yang memicu modal
-            const button = event.relatedTarget;
+            pengumumanModal.addEventListener('show.bs.modal', function(event) {
+                // Elemen yang memicu modal
+                const button = event.relatedTarget;
 
-            // Ambil data dari atribut tombol
-            const judul = button.getAttribute('data-judul');
-            const deskripsi = button.getAttribute('data-deskripsi');
+                // Ambil data dari atribut tombol
+                const judul = button.getAttribute('data-judul');
+                const deskripsi = button.getAttribute('data-deskripsi');
 
-            // Cetak nilai ke console setelah didefinisikan
-            console.log('Judul:', judul);
-            console.log('Deskripsi:', deskripsi);
+                // Cetak nilai ke console setelah didefinisikan
+                console.log('Judul:', judul);
+                console.log('Deskripsi:', deskripsi);
 
-            // Masukkan data ke modal
-            modalTitle.textContent = judul;
-            modalBody.textContent = deskripsi;
+                // Masukkan data ke modal
+                modalTitle.textContent = judul;
+                modalBody.textContent = deskripsi;
+            });
         });
-    });
 
-    function confirmLogout() {
+        function confirmLogout() {
             Swal.fire({
                 title: 'Apakah anda yakin ingin keluar?',
                 text: "Anda akan keluar dari akun ini.",
@@ -138,17 +138,17 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '{{ route('logout') }}';  // Arahkan ke route logout jika 'Ya' dipilih
+                    window.location.href = '{{ route('logout') }}'; // Arahkan ke route logout jika 'Ya' dipilih
                 }
             });
         }
-</script>
+    </script>
 
 @section('styles')
-<style>
-    #pengumumanModal .modal-content {
-        width: 50%;
-        margin: 30px auto;
-    }
-</style>
+    <style>
+        #pengumumanModal .modal-content {
+            width: 50%;
+            margin: 30px auto;
+        }
+    </style>
 @endsection
