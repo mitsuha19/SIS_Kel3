@@ -14,8 +14,6 @@
     </div>
 
     <div class="container mt-4">
-        <h3 class="mb-3">Kemajuan Studi</h3>
-
         <!-- Grafik Kemajuan Studi -->
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -27,24 +25,21 @@
         </div>
 
         <!-- IP, NR, IPS -->
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-8">
+    
+            <div class="col mt-4">
                 <div class="row">
                     <div class="col-4">
-                        <div class="card p-3 shadow-sm">
-                            <h5 class="card-title">IP</h5>
-                            <p class="fs-5">{{ $data['IP'] }}</p>
-                        </div>
+                            <h5 class="card-title">IP : {{ $data['IP'] }}</h5>
                     </div>
                 </div>
             </div>
-        </div>
+
 
         <!-- Tabel Mata Kuliah per Semester -->
         @foreach ($matkulPerSemester as $semester => $matkuls)
             <div class="row justify-content-center mt-4">
-                <div class="col-md-8">
-                    <div class="card p-3 shadow-sm">
+               
+                    
                         <h5 class="card-title">Mata Kuliah {{ $semester }}</h5>
 
                         <!-- Menampilkan IP Semester di atas tabel -->
@@ -56,8 +51,8 @@
 
                         <!-- Tabel Mata Kuliah -->
                         <table class="table table-bordered table-hover">
-                            <thead class="table-dark">
-                                <tr>
+                            <thead >
+                            <tr >
                                     <th>Kode Mata Kuliah</th>
                                     <th>Nama Mata Kuliah</th>
                                     <th>SKS</th>
@@ -79,9 +74,8 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
                 </div>
-            </div>
+      
         @endforeach
     </div>
 

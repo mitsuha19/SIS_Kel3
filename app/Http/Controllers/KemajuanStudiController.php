@@ -98,7 +98,7 @@ class KemajuanStudiController extends Controller
                         'semester' => $semesterKey,
                         'ta' => $semesterData[0]['ta'],
                         'sem' => $semesterData[0]['sem_ta'],
-                        'ip_semester' => $semesterData[0]['ip_semester'] ?? 'Belumdi-generate',
+                        'ip_semester' => $semesterData[0]['ip_semester'] ?? 'Belum di-generate',
                     ];
                 }
 
