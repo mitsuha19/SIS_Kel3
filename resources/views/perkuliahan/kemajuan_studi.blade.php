@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     <div class="d-flex align-items-center mb-4 border-bottom-line">
         <h3 class="me-auto">
@@ -7,13 +8,14 @@
             <a href="{{ route('kemajuan_studi') }}">Perkuliahan</a> /
             <a href="{{ route('kemajuan_studi') }}">Kemajuan Studi</a>
         </h3>
-        <a href="#" onclick="confirmLogout()" class="ms-auto">
+        <a href="{{ route('logout') }}">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>
     </div>
 
     <div class="container mt-4">
         <h3 class="mb-3">Kemajuan Studi</h3>
+
         <!-- Grafik Kemajuan Studi -->
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -23,64 +25,64 @@
                 </div>
             </div>
         </div>
-        ip = {{ $data['IP'] }}
-        <!-- Tabel Mata Kuliah -->
-        <div class="row justify-content-center mt-4">
+
+        <!-- IP, NR, IPS -->
+        <div class="row justify-content-center mb-4">
             <div class="col-md-8">
-                <div class="card p-3 shadow-sm">
-                    <h5 class="card-title">Daftar Mata Kuliah</h5>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Kode Mata Kuliah</th>
-                                <th>Nama Mata Kuliah</th>
-                                <th>SKS</th>
-                                <th>Semester</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data Dummy Mata Kuliah -->
-                            <tr>
-                                <td>CS101</td>
-                                <td>Algoritma dan Struktur Data</td>
-                                <td>3</td>
-                                <td>Semester 1</td>
-                            </tr>
-                            <tr>
-                                <td>CS102</td>
-                                <td>Basis Data</td>
-                                <td>3</td>
-                                <td>Semester 2</td>
-                            </tr>
-                            <tr>
-                                <td>CS201</td>
-                                <td>Pemrograman Web</td>
-                                <td>3</td>
-                                <td>Semester 3</td>
-                            </tr>
-                            <tr>
-                                <td>CS202</td>
-                                <td>Jaringan Komputer</td>
-                                <td>3</td>
-                                <td>Semester 4</td>
-                            </tr>
-                            <tr>
-                                <td>CS301</td>
-                                <td>Rekayasa Perangkat Lunak</td>
-                                <td>4</td>
-                                <td>Semester 5</td>
-                            </tr>
-                            <tr>
-                                <td>CS302</td>
-                                <td>Keamanan Informasi</td>
-                                <td>3</td>
-                                <td>Semester 6</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card p-3 shadow-sm">
+                            <h5 class="card-title">IP</h5>
+                            <p class="fs-5">{{ $data['IP'] }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Tabel Mata Kuliah per Semester -->
+        @foreach ($matkulPerSemester as $semester => $matkuls)
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-8">
+                    <div class="card p-3 shadow-sm">
+                        <h5 class="card-title">Mata Kuliah {{ $semester }}</h5>
+
+                        <!-- Menampilkan IP Semester di atas tabel -->
+                        @foreach ($sortedSemesterData as $semesterData)
+                            @if ($semesterData['semester'] == $semester)
+                                <p><strong>IP Semester: {{ $semesterData['ip_semester'] }}</strong></p>
+                            @endif
+                        @endforeach
+
+                        <!-- Tabel Mata Kuliah -->
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Kode Mata Kuliah</th>
+                                    <th>Nama Mata Kuliah</th>
+                                    <th>SKS</th>
+                                    <th>Nilai Akhir</th>
+                                    <th>Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($matkuls as $matkul)
+                                    <tr>
+                                        <td>{{ $matkul['kode_mk'] }}</td>
+                                        <td><a
+                                                href="{{ route('detailnilai', ['kode_mk' => $matkul['kode_mk']]) }}">{{ $matkul['nama_kul_ind'] }}</a>
+                                        </td>
+                                        <td>{{ $matkul['sks'] }}</td>
+                                        <td>{{ $matkul['na'] }}</td>
+                                        <td>{{ $matkul['nilai'] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -91,35 +93,29 @@
 
         const ctx = document.getElementById('kemajuanStudiChart').getContext('2d');
         const kemajuanStudiChart = new Chart(ctx, {
-            type: 'line',
+            type: 'line', // Menggunakan line chart
             data: {
                 labels: labels, // Label sumbu X
                 datasets: [{
-                    label: 'Nilai IP Semester',
-                    data: dataValues, // Data nilai IP semester
-                    borderColor: '#007bff', // Warna garis
-                    backgroundColor: 'rgba(0, 123, 255, 0.2)', // Warna area di bawah garis
-                    fill: true, // Isi area di bawah garis
-                    tension: 0.3, // Kelengkungan garis
+                    label: 'IP Semester',
+                    data: dataValues, // Nilai IP untuk grafik
+                    fill: false,
+                    borderColor: '#007bff', // Warna garis grafik
+                    tension: 0.1 // Kurva garis
                 }]
             },
             options: {
                 responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
                 scales: {
                     y: {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Nilai IP Semester',
-                        },
-                    },
-                },
-            },
+                            text: 'Indeks Prestasi (IP)'
+                        }
+                    }
+                }
+            }
         });
     </script>
 @endsection

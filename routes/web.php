@@ -6,14 +6,15 @@ use App\Http\Controllers\IKController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\AsramaController;
 use App\Http\Controllers\BursarController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\KemajuanStudiController;
 use App\Http\Controllers\PresensiController;
-use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\DetailNilaiController;
+use App\Http\Controllers\KemajuanStudiController;
 
 // Login dan Logout
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
@@ -46,6 +47,7 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
     Route::get('perkuliahan/{kodeMk}/detail', [PresensiController::class, 'showDetail'])->name('absensi.detail');
     //kemajuan studi
     Route::get('perkuliahan/kemajuan_studi', [KemajuanStudiController::class, 'index'])->name('kemajuan_studi');
+    Route::get('/detailnilai/{kode_mk}', [DetailNilaiController::class, 'show'])->name('detailnilai');
 });
 
 Route::middleware(['auth.session', 'role:admin'])->group(function () {

@@ -20,10 +20,15 @@ class KemajuanStudiController extends Controller
                     'nim' => $nim,
                 ]);
 
-            Log::info('Respons API kemajuan studi:', ['body' => $response->body()]);
+            $response2 = Http::withToken($apiToken)
+                ->withOptions(['verify' => false])
+                ->get('https://cis-dev.del.ac.id/api/library-api/nilai-akhir', [
+                    'nim' => $nim,
+                ]);
 
-            if ($response->successful()) {
+            if ($response->successful() && $response2->successful()) {
                 $data = $response->json();
+                $data2 = $response2->json();
                 $ipSemester = $data['IP Semester'] ?? [];
 
                 // Urutkan data berdasarkan tahun akademik (ta) dan semester (sem)
@@ -34,18 +39,70 @@ class KemajuanStudiController extends Controller
                     return $a['ta'] <=> $b['ta'];
                 });
 
+                // Ambil tahun akademik yang paling awal (ta terkecil)
+                $firstTa = min(array_map(function ($item) {
+                    return $item['ta'];
+                }, $ipSemester));
+
+                // Buat array semester berdasarkan urutan TA
+                $semesterData = [];
+                $semesterCounter = 1; // Mulai dari semester 1
+
+                foreach ($ipSemester as $semester => $details) {
+                    $semesterData[] = [
+                        'semester' => $semesterCounter++, // Menghitung urutan semester
+                        'ta' => $details['ta'],
+                        'sem' => $details['sem'],
+                        'ip_semester' => $details['ip_semester']
+                    ];
+                }
+
+                // Siapkan labels dan values untuk chart berdasarkan data semester yang ada
                 $labels = [];
                 $values = [];
 
-                foreach ($ipSemester as $semester => $details) {
-                    $labels[] = "TA {$details['ta']} - Semester {$details['sem']}";
-                    $values[] = is_numeric($details['ip_semester']) ? (float) $details['ip_semester'] : 0;
+                $semesterCounter = 1; // Mulai dari semester 1 secara default
+
+                foreach ($semesterData as $semester) {
+                    // Tentukan urutan semester sesuai dengan data yang ada
+                    $semesterLabel = "Semester " . ($semester['sem'] + ($semester['ta'] - $firstTa) * 2);  // Menentukan urutan semester berdasarkan sem dan ta
+
+                    $labels[] = "{$semesterLabel} (TA {$semester['ta']})"; // Menggunakan nama semester yang sesuai
+                    $values[] = is_numeric($semester['ip_semester']) ? (float) $semester['ip_semester'] : 0;
                 }
 
-                Log::info('Labels:', $labels);
-                Log::info('Values:', $values);
+                // Memproses mata kuliah per semester
+                $matkulPerSemester = [];
+                $semesterOrder = []; // Menyimpan urutan semester dari mata kuliah
 
-                return view('perkuliahan.kemajuan_studi', compact('labels', 'values', 'data'));
+                foreach ($data2['data'] as $matkul) {
+                    // Menghitung semester berdasarkan TA terkecil
+                    $semesterKey = "Semester " . (($matkul['ta'] - $firstTa) * 2 + $matkul['sem_ta']);
+
+                    if (!isset($matkulPerSemester[$semesterKey])) {
+                        $matkulPerSemester[$semesterKey] = [];
+                    }
+                    $matkulPerSemester[$semesterKey][] = $matkul;
+
+                    // Menyimpan urutan semester berdasarkan data mata kuliah
+                    if (!in_array($semesterKey, $semesterOrder)) {
+                        $semesterOrder[] = $semesterKey;
+                    }
+                }
+
+                // Mengurutkan semester berdasarkan urutan yang ditemukan pada data mata kuliah
+                $sortedSemesterData = [];
+                foreach ($semesterOrder as $semesterKey) {
+                    $semesterData = $matkulPerSemester[$semesterKey];
+                    $sortedSemesterData[] = [
+                        'semester' => $semesterKey,
+                        'ta' => $semesterData[0]['ta'],
+                        'sem' => $semesterData[0]['sem_ta'],
+                        'ip_semester' => $semesterData[0]['ip_semester'] ?? 'Belumdi-generate',
+                    ];
+                }
+
+                return view('perkuliahan.kemajuan_studi', compact('labels', 'values', 'data', 'data2', 'matkulPerSemester', 'sortedSemesterData'));
             }
 
             Log::error('Gagal mengambil data kemajuan studi:', ['response' => $response->body()]);
