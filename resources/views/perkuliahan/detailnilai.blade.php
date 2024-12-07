@@ -5,7 +5,7 @@
         <h3 class="mb-3">Detail Mata Kuliah</h3>
 
         <div class="card p-3 shadow-sm">
-            <h5 class="card-title">{{ $matkul->nama_kul_ind }}</h5>
+            <h5 class="card-title">{{ $matkul['nama_kul_ind'] }}</h5>
 
             <table class="table table-bordered">
                 <thead>
@@ -19,11 +19,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ $matkul->kode_mk }}</td>
-                        <td>{{ $matkul->nama_kul_ind }}</td>
-                        <td>{{ $matkul->sks }}</td>
-                        <td>{{ $matkul->na }}</td>
-                        <td>{{ $matkul->nilai }}</td>
+                        <td>{{ $matkul['kode_mk'] }}</td>
+                        <td>{{ $matkul['nama_kul_ind'] }}</td>
+                        <td>{{ $matkul['sks'] }}</td>
+                        <td>{{ $matkul['na'] }}</td>
+                        <td>{{ $matkul['nilai'] }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -31,44 +31,21 @@ class KemajuanStudiController extends Controller
                 $data2 = $response2->json();
                 $ipSemester = $data['IP Semester'] ?? [];
 
-                // Urutkan data berdasarkan tahun akademik (ta) dan semester (sem)
+                // Urutkan data berdasarkan tahun akademik (ta) dan semester (sem_ta)
                 uasort($ipSemester, function ($a, $b) {
                     if ($a['ta'] === $b['ta']) {
-                        return $a['sem'] <=> $b['sem'];
+                        return $a['sem_ta'] <=> $b['sem_ta'];
                     }
                     return $a['ta'] <=> $b['ta'];
                 });
 
-                // Ambil tahun akademik yang paling awal (ta terkecil)
-                $firstTa = min(array_map(function ($item) {
-                    return $item['ta'];
-                }, $ipSemester));
-
-                // Buat array semester berdasarkan urutan TA
-                $semesterData = [];
-                $semesterCounter = 1; // Mulai dari semester 1
-
-                foreach ($ipSemester as $semester => $details) {
-                    $semesterData[] = [
-                        'semester' => $semesterCounter++, // Menghitung urutan semester
-                        'ta' => $details['ta'],
-                        'sem' => $details['sem'],
-                        'ip_semester' => $details['ip_semester']
-                    ];
-                }
-
-                // Siapkan labels dan values untuk chart berdasarkan data semester yang ada
+                // Siapkan labels dan values untuk chart
                 $labels = [];
                 $values = [];
 
-                $semesterCounter = 1; // Mulai dari semester 1 secara default
-
-                foreach ($semesterData as $semester) {
-                    // Tentukan urutan semester sesuai dengan data yang ada
-                    $semesterLabel = "Semester " . ($semester['sem'] + ($semester['ta'] - $firstTa) * 2);  // Menentukan urutan semester berdasarkan sem dan ta
-
-                    $labels[] = "{$semesterLabel} (TA {$semester['ta']})"; // Menggunakan nama semester yang sesuai
-                    $values[] = is_numeric($semester['ip_semester']) ? (float) $semester['ip_semester'] : 0;
+                foreach ($ipSemester as $details) {
+                    $labels[] = "TA {$details['ta']} - Semester {$details['sem_ta']}";
+                    $values[] = is_numeric($details['ip_semester']) ? (float) $details['ip_semester'] : 0;
                 }
 
                 // Memproses mata kuliah per semester
@@ -76,15 +53,13 @@ class KemajuanStudiController extends Controller
                 $semesterOrder = []; // Menyimpan urutan semester dari mata kuliah
 
                 foreach ($data2['data'] as $matkul) {
-                    // Menghitung semester berdasarkan TA terkecil
-                    $semesterKey = "Semester " . (($matkul['ta'] - $firstTa) * 2 + $matkul['sem_ta']);
+                    $semesterKey = "TA {$matkul['ta']} - Semester {$matkul['sem_ta']}";
 
                     if (!isset($matkulPerSemester[$semesterKey])) {
                         $matkulPerSemester[$semesterKey] = [];
                     }
                     $matkulPerSemester[$semesterKey][] = $matkul;
 
-                    // Menyimpan urutan semester berdasarkan data mata kuliah
                     if (!in_array($semesterKey, $semesterOrder)) {
                         $semesterOrder[] = $semesterKey;
                     }
@@ -94,11 +69,19 @@ class KemajuanStudiController extends Controller
                 $sortedSemesterData = [];
                 foreach ($semesterOrder as $semesterKey) {
                     $semesterData = $matkulPerSemester[$semesterKey];
+
+                    // Ambil nilai IP semester dari $ipSemester berdasarkan TA dan sem_ta
+                    $matchingIpSemester = array_filter($ipSemester, function ($item) use ($semesterData) {
+                        return $item['ta'] == $semesterData[0]['ta'] && $item['sem_ta'] == $semesterData[0]['sem_ta'];
+                    });
+
+                    $matchingIpSemester = reset($matchingIpSemester); // Ambil elemen pertama yang cocok
+
                     $sortedSemesterData[] = [
                         'semester' => $semesterKey,
                         'ta' => $semesterData[0]['ta'],
                         'sem' => $semesterData[0]['sem_ta'],
-                        'ip_semester' => $semesterData[0]['ip_semester'] ?? 'Belum di-generate',
+                        'ip_semester' => $matchingIpSemester['ip_semester'] ?? 'Belum di-generate',
                     ];
                 }
 
