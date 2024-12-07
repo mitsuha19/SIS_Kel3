@@ -632,3 +632,23 @@ p {
 .ms-auto i:hover {
     color: #0056b3;
 }
+
+.underline-bold {
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: underline;
+}
+.table-container {
+    max-width: 700px; /* Batasi lebar tabel */
+    margin: 0 auto; 
+    margin-left: 0px; /* Pusatkan tabel */
+}
+/* Rata kiri untuk teks dalam tab */
+.nav-link {
+    text-align: left;
+}
+
+/* Rata kiri untuk isi tabel */
+.table th, .table td {
+    text-align: left;
+}
