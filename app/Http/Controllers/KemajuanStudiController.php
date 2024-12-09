@@ -39,12 +39,15 @@ class KemajuanStudiController extends Controller
                     return $a['ta'] <=> $b['ta'];
                 });
 
+                // Simpan nilai semester (sem) ke session
+                session(['sem' => collect($ipSemester)->pluck('sem')->unique()->toArray()]);
+
                 // Siapkan labels dan values untuk chart
                 $labels = [];
                 $values = [];
 
                 foreach ($ipSemester as $details) {
-                    $labels[] = "TA {$details['ta']} - Semester {$details['sem_ta']}";
+                    $labels[] = "TA {$details['ta']} - Semester {$details['sem']}";
                     $values[] = is_numeric($details['ip_semester']) ? (float) $details['ip_semester'] : 0;
                 }
 
