@@ -258,7 +258,7 @@ body {
     display: flex;
     flex-direction: row;
     /* Menambahkan font Poppins untuk seluruh body */
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .profile-section {
@@ -406,9 +406,9 @@ body {
 
 /* Modal Header */
 .modal-header {
-    background: linear-gradient(135deg, #4A90E2, #50C2E3);
+    background: linear-gradient(135deg, #4a90e2, #50c2e3);
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 /* Form Controls */
@@ -416,24 +416,26 @@ body {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 /* Tombol Footer */
 .modal-footer .btn {
     border-radius: 20px;
     padding: 10px 20px;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
- /* Mengatur font untuk seluruh container */
- h4, ul, ul li, .btn {
-    font-family: 'Poppins', sans-serif;
+/* Mengatur font untuk seluruh container */
+h4,
+ul,
+ul li,
+.btn {
+    font-family: "Poppins", sans-serif;
 }
 
 /* Styling tambahan untuk judul h4 */
 h4 {
-    
     font-size: 1.5rem;
     font-weight: 600;
     color: #333;
@@ -484,7 +486,7 @@ ul li {
 
 /* Mengatur font untuk label */
 .form-label {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1rem; /* Ukuran font */
     font-weight: 500; /* Ketebalan font */
     color: #333; /* Warna teks */
@@ -513,48 +515,48 @@ ul li {
     color: white;
 }
 
-    .breadcrumb {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
-    }
+.breadcrumb {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
 
-    .breadcrumb a {
-        color: #000;
-    }
+.breadcrumb a {
+    color: #000;
+}
 
-    .breadcrumb a:hover {
-        color: #555;
-        text-decoration: none;
-    }
+.breadcrumb a:hover {
+    color: #555;
+    text-decoration: none;
+}
 
-    .border-bottom {
-        border-bottom: 2px solid #000;
-    }
+.border-bottom {
+    border-bottom: 2px solid #000;
+}
 
-    .table th,
-    .table td {
-        vertical-align: middle;
-        text-align: center;
-    }
+.table th,
+.table td {
+    vertical-align: middle;
+    text-align: center;
+}
 
-    .table a {
-        font-weight: bold;
-    }
+.table a {
+    font-weight: bold;
+}
 
-    .table {
-        width: 100%;
-        margin-top: 1rem;
-    }
+.table {
+    width: 100%;
+    margin-top: 1rem;
+}
 
-    .table-bordered th,
-    .table-bordered td {
-        border: 1px solid #dee2e6;
-    }
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
 
-    /* Mengatur posisi judul 'Absensi Mahasiswa' ke kiri */
+/* Mengatur posisi judul 'Absensi Mahasiswa' ke kiri */
 h3 {
-    text-align: left;  /* Mengatur teks agar rata kiri */
-    margin-top: 20px; 
+    text-align: left; /* Mengatur teks agar rata kiri */
+    margin-top: 20px;
 }
 
 /* Mengatur warna tautan menjadi hitam dan menghapus garis bawah */
@@ -590,11 +592,10 @@ h3.me-auto a:hover {
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
-    
 }
 
 .h4-Prodi::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -640,7 +641,7 @@ p {
 }
 .table-container {
     max-width: 700px; /* Batasi lebar tabel */
-    margin: 0 auto; 
+    margin: 0 auto;
     margin-left: 0px; /* Pusatkan tabel */
 }
 /* Rata kiri untuk teks dalam tab */
@@ -649,6 +650,89 @@ p {
 }
 
 /* Rata kiri untuk isi tabel */
-.table th, .table td {
+.table th,
+.table td {
     text-align: left;
+}
+
+/* Tabel nilai */
+.table-nilai {
+    width: 100%;
+    max-width: 800px;
+    margin: 0; /* Hilangkan auto margin */
+    text-align: left; /* Teks rata kiri */
+}
+
+/* Tabs nilai */
+.nav-tabs-nilai {
+    justify-content: flex-start; /* Rata kiri tab */
+    margin-bottom: 1rem;
+}
+
+.nav-tabs-nilai .nav-item .nav-link {
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 0;
+}
+
+.nav-tabs-nilai .nav-item {
+    margin: 0 5px;
+}
+
+/* Konten tab */
+.tab-content-nilai {
+    width: 100%;
+    max-width: 800px;
+    margin: 0; /* Hilangkan auto margin */
+    text-align: left; /* Konten rata kiri */
+}
+
+/* Card styling */
+.card-nilai {
+    max-width: 800px;
+    margin: 0; /* Hilangkan auto margin */
+    text-align: left; /* Teks rata kiri */
+}
+
+/* Atur kontainer utama */
+.nav-tabs-nilai {
+    background-color: #007bff; /* Warna biru */
+    border-bottom: none; /* Hilangkan border bawah default */
+    display: flex;
+    justify-content: flex-start; /* Rata kiri */
+    width: 100%; /* Penuh lebar */
+    max-width: 800px; /* Batas lebar */
+}
+
+/* Tab default */
+.nav-tabs-nilai .nav-link {
+    color: white; /* Teks putih */
+    background-color: transparent; /* Transparan agar menyatu */
+    border: none; /* Hilangkan border default */
+    margin-right: 0; /* Hilangkan jarak antar-tab */
+    text-align: center; /* Teks di tengah dalam tab */
+    padding: 10px 15px; /* Sesuaikan padding */
+    flex: 0; /* Lebar tab menyesuaikan konten */
+}
+
+/* Tab aktif */
+.nav-tabs-nilai .nav-link.active {
+    color: #007bff; /* Teks biru */
+    background-color: white; /* Latar putih */
+    border: 1px solid #007bff; /* Border biru */
+    border-bottom-color: white; /* Hilangkan border bawah tab aktif */
+    z-index: 1; /* Letakkan di atas garis biru */
+}
+
+/* Hover */
+.nav-tabs-nilai .nav-link:hover {
+    color: white; /* Teks tetap putih */
+    background-color: #0056b3; /* Biru gelap */
+}
+
+/* Konten tab */
+.tab-content-nilai {
+    max-width: 800px; /* Batasi lebar konten tab */
+    margin-left: 0; /* Rata kiri */
+    margin-right: auto;
 }

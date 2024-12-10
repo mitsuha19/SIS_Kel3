@@ -20,7 +20,7 @@
         <!-- Tabel -->
         <div class="mt-5">
             <table class="table table-hover table-bordered align-middle" style="width: 80%; margin: 0 auto;">
-                <thead class="table-primary">
+                <thead class="table-secondary">
                     <tr>
                         <th>#</th>
                         <th>Kode Matakuliah</th>

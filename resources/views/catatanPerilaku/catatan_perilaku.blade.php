@@ -21,20 +21,19 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th style="width: 5%">No</th>
                     <th>TA</th>
                     <th>Semester</th>
                     <th>Skor Awal</th>
                     <th>Akumulasi Skor</th>
                     <th>Nilai Huruf</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @php $index = 1; @endphp
                 @forelse ($nilaiPerilaku as $key => $perilaku)
                     <tr>
-                        <td>{{ $index++ }}</td>
+                        <td style="width: 5%">{{ $index++ }}</td>
                         <td>{{ $perilaku['ta'] ?? '-' }}</td>
                         <td>{{ $perilaku['semester'] ?? '-' }}</td>
                         <td>{{ $perilaku['akumulasi_skor_awal'] ?? 0 }}</td>

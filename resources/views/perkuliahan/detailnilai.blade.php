@@ -13,9 +13,9 @@
         </div>
 
         <!-- Informasi Mata Kuliah -->
-        <h3 class="mb-3 underline-bold">Detail Mata Kuliah</h3>
-        <div class="card p-3 shadow-sm mb-4">
-            <table class="table table-bordered">
+        <h3 class="mb-3 underline-bold">Detail Nilai Mata Kuliah</h3>
+        <div class="card-nilai p-3 shadow-sm mb-4">
+            <table class="table table-bordered table-nilai">
                 <tbody>
                     <tr>
                         <th>Kode Mata Kuliah</th>
@@ -45,54 +45,127 @@
             </table>
         </div>
 
-        <!-- Tabs -->
-        <ul class="nav nav-tabs" id="nilaiTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="tugas-tab" data-bs-toggle="tab" data-bs-target="#tugas" type="button"
-                    role="tab" aria-controls="tugas" aria-selected="true">Tugas</button>
+        <ul class="nav nav-tabs nav-tabs-nilai" id="nilaiTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="praktikum-tab" data-bs-toggle="tab" data-bs-target="#praktikum"
+                    type="button" role="tab" aria-controls="praktikum" aria-selected="true">Praktikum</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
+                <button class="nav-link" id="tugas-tab" data-bs-toggle="tab" data-bs-target="#tugas" type="button"
+                    role="tab" aria-controls="tugas" aria-selected="false">Tugas</button>
+            </li>
+            <li class="nav-item">
                 <button class="nav-link" id="kuis-tab" data-bs-toggle="tab" data-bs-target="#kuis" type="button"
                     role="tab" aria-controls="kuis" aria-selected="false">Kuis</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <button class="nav-link" id="uts-tab" data-bs-toggle="tab" data-bs-target="#uts" type="button"
                     role="tab" aria-controls="uts" aria-selected="false">UTS</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <button class="nav-link" id="uas-tab" data-bs-toggle="tab" data-bs-target="#uas" type="button"
                     role="tab" aria-controls="uas" aria-selected="false">UAS</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <button class="nav-link" id="tambahan-tab" data-bs-toggle="tab" data-bs-target="#tambahan" type="button"
-                    role="tab" aria-controls="tambahan" aria-selected="false">Nilai Tambahan</button>
+                    role="tab" aria-controls="tambahan" aria-selected="false">Tambahan</button>
             </li>
         </ul>
 
-        <!-- Tab Content -->
-        <div class="tab-content mt-4">
-            <div class="tab-pane fade show active" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-                <p><strong>{{ $detailNilai['nama_tugas'] ?? 'Tugas' }}</strong>:
-                    {{ $detailNilai['nilai_tugas'] ?? 'Belum Ada Nilai' }}</p>
+
+        <div class="tab-content tab-content-nilai mt-4">
+            <!-- Praktikum -->
+            <div class="tab-pane fade show active" id="praktikum" role="tabpanel" aria-labelledby="praktikum-tab">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $detailNilai['nama_praktikum'] ?? 'Praktikum' }}</td>
+                            <td>{{ $detailNilai['nilai_praktikum'] ?? 'Belum Ada Nilai' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <!-- Tugas -->
+            <div class="tab-pane fade" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $detailNilai['nama_tugas'] ?? 'Tugas' }}</td>
+                            <td>{{ $detailNilai['nilai_tugas'] ?? 'Belum Ada Nilai' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Kuis -->
             <div class="tab-pane fade" id="kuis" role="tabpanel" aria-labelledby="kuis-tab">
-                <p><strong>{{ $detailNilai['nama_kuis'] ?? 'Kuis' }}</strong>:
-                    {{ $detailNilai['nilai_kuis'] ?? 'Belum Ada Nilai' }}</p>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $detailNilai['nama_kuis'] ?? 'Kuis' }}</td>
+                            <td>{{ $detailNilai['nilai_kuis'] ?? 'Belum Ada Nilai' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <!-- UTS -->
             <div class="tab-pane fade" id="uts" role="tabpanel" aria-labelledby="uts-tab">
-                <p><strong>{{ $detailNilai['nama_uts'] ?? 'UTS' }}</strong>:
-                    {{ $detailNilai['nilai_uts'] ?? 'Belum Ada Nilai' }}</p>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $detailNilai['nama_uts'] ?? 'UTS' }}</td>
+                            <td>{{ $detailNilai['nilai_uts'] ?? 'Belum Ada Nilai' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <!-- UAS -->
             <div class="tab-pane fade" id="uas" role="tabpanel" aria-labelledby="uas-tab">
-                <p><strong>{{ $detailNilai['nama_uas'] ?? 'UAS' }}</strong>:
-                    {{ $detailNilai['nilai_uas'] ?? 'Belum Ada Nilai' }}</p>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $detailNilai['nama_uas'] ?? 'UAS' }}</td>
+                            <td>{{ $detailNilai['nilai_uas'] ?? 'Belum Ada Nilai' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <!-- Tambahan -->
             <div class="tab-pane fade" id="tambahan" role="tabpanel" aria-labelledby="tambahan-tab">
                 <table class="table table-bordered text-center">
-                    <thead class="table-primary">
+                    <thead>
                         <tr>
                             <th>Nama Tambahan</th>
-                            <th>Nilai Tambahan</th>
+                            <th>Nilai</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,5 +181,7 @@
                 </table>
             </div>
         </div>
+
+
     </div>
 @endsection
