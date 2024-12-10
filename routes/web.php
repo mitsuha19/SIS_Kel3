@@ -12,6 +12,7 @@ use App\Http\Controllers\BursarController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CatatanPerilakuController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\DetailNilaiController;
 use App\Http\Controllers\KemajuanStudiController;
@@ -25,7 +26,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->group(function () {
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     Route::get('/pengumuman/{id}', [HomeController::class, 'show'])->name('pengumuman.detail');
-    Route::view('/catatan_perilaku', 'catatanPerilaku/catatan_perilaku')->name('catatan_perilaku');
 
     // Profil
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
@@ -48,6 +48,9 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
     //kemajuan studi
     Route::get('perkuliahan/kemajuan_studi', [KemajuanStudiController::class, 'index'])->name('kemajuan_studi');
     Route::get('/detailnilai/{kode_mk}', [DetailNilaiController::class, 'show'])->name('detailnilai');
+
+    //catatan perilaku 
+    Route::get('/catatan_perilaku', [CatatanPerilakuController::class, 'index'])->name('catatan_perilaku');
 });
 
 Route::middleware(['auth.session', 'role:admin'])->group(function () {

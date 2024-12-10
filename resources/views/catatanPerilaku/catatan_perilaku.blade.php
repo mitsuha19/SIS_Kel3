@@ -1,13 +1,13 @@
-@extends('layouts.app') <!-- Layout utama -->
+@extends('layouts.app')
 
 @section('content')
     <!-- Header -->
     <div class="d-flex align-items-center mb-4 border-bottom">
-    <h3 class="me-auto">
-        <a href="{{ route('beranda') }}">Home</a> /
-        <a href="{{ route('catatan_perilaku') }}">Catatan Perilaku</a>
+        <h3 class="me-auto">
+            <a href="{{ route('beranda') }}">Home</a> /
+            <a href="{{ route('catatan_perilaku') }}">Catatan Perilaku</a>
         </h3>
-        <a href="{{ route('logout') }}"><a href="#" onclick="confirmLogout()">
+        <a href="#" onclick="confirmLogout()">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>
     </div>
@@ -27,93 +27,87 @@
                     <th>Skor Awal</th>
                     <th>Akumulasi Skor</th>
                     <th>Nilai Huruf</th>
-                    <th></th> <!-- Untuk tombol view di akhir tabel -->
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2024/2025</td>
-                    <td>Gasal</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>A</td>
-                    <td><button class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i></button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2023/2024</td>
-                    <td>Pendek</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>A</td>
-                    <td><button class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i></button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>2023/2024</td>
-                    <td>Genap</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>A</td>
-                    <td><button class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i></button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>2023/2024</td>
-                    <td>Gasal</td>
-                    <td>0</td>
-                    <td>3</td>
-                    <td>AB</td>
-                    <td><button class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i></button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>2022/2023</td>
-                    <td>Pendek</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>A</td>
-                    <td><button class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i></button></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>2022/2023</td>
-                    <td>Genap</td>
-                    <td>0</td>
-                    <td>6</td>
-                    <td>B</td>
-                    <td><button class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i></button></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>2022/2023</td>
-                    <td>Gasal</td>
-                    <td>0</td>
-                    <td>8</td>
-                    <td>B</td>
-                    <td><button class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i></button></td>
-                </tr>
+                @php $index = 1; @endphp
+                @forelse ($nilaiPerilaku as $key => $perilaku)
+                    <tr>
+                        <td>{{ $index++ }}</td>
+                        <td>{{ $perilaku['ta'] ?? '-' }}</td>
+                        <td>{{ $perilaku['semester'] ?? '-' }}</td>
+                        <td>{{ $perilaku['akumulasi_skor_awal'] ?? 0 }}</td>
+                        <td>{{ $perilaku['akumulasi_skor'] ?? 0 }}</td>
+                        <td>{{ $perilaku['nilai_huruf'] ?? '-' }}</td>
+                        <td>
+                            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="collapse"
+                                data-bs-target="#details{{ $key }}">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="collapse" id="details{{ $key }}">
+                        <td colspan="7">
+                            <div class="p-3">
+                                <h5>Pembinaan:</h5>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab"
+                                            href="#pelanggaran{{ $key }}">Pelanggaran
+                                            ({{ count($perilaku['pelanggaran']) }})
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content mt-3">
+                                    <!-- Tab Pelanggaran -->
+                                    <div class="tab-pane fade show active" id="pelanggaran{{ $key }}">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Pelanggaran</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Bentuk</th>
+                                                    <th>Tingkat</th>
+                                                    <th>Poin</th>
+                                                    <th>Pembinaan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php $pelanggaranIndex = 1; @endphp
+                                                @forelse ($perilaku['pelanggaran'] as $pelanggaran)
+                                                    <tr>
+                                                        <td>{{ $pelanggaranIndex++ }}</td>
+                                                        <td>{{ $pelanggaran['tanggal'] ?? '-' }}</td>
+                                                        <td>{{ $pelanggaran['pelanggaran'] ?? '-' }}</td>
+                                                        <td>{{ $pelanggaran['deskripsi'] ?? '-' }}</td>
+                                                        <td>{{ $pelanggaran['bentuk'] ?? '-' }}</td>
+                                                        <td>{{ $pelanggaran['tingkat'] ?? '-' }}</td>
+                                                        <td>{{ $pelanggaran['poin'] ?? 0 }}</td>
+                                                        <td>{{ $pelanggaran['pembinaan'] ?? '-' }}</td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="8" class="text-center">Tidak ada data pelanggaran.
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Tidak ada data perilaku.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function confirmLogout() {
-            Swal.fire({
-                title: 'Apakah anda yakin ingin keluar?',
-                text: "Anda akan keluar dari akun ini.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, keluar!',
-                cancelButtonText: 'Tidak',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '{{ route('logout') }}';  // Arahkan ke route logout jika 'Ya' dipilih
-                }
-            });
-        }
-    </script>
 @endsection
