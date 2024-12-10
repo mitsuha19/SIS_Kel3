@@ -78,7 +78,7 @@
                                             </thead>
                                             <tbody>
                                                 @php $pelanggaranIndex = 1; @endphp
-                                                @forelse ($perilaku['pelanggaran'] as $pelanggaran)
+                                                @forelse ($perilaku['pelanggaran'] ?? [] as $pelanggaran)
                                                     <tr>
                                                         <td>{{ $pelanggaranIndex++ }}</td>
                                                         <td>{{ $pelanggaran['tanggal'] ?? '-' }}</td>
@@ -96,6 +96,7 @@
                                                     </tr>
                                                 @endforelse
                                             </tbody>
+
                                         </table>
                                     </div>
                                 </div>

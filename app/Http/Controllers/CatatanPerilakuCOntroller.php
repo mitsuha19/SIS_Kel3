@@ -26,9 +26,9 @@ class CatatanPerilakuController extends Controller
                 ->withOptions(['verify' => false])
                 ->get('https://cis-dev.del.ac.id/api/aktivitas-mhs-api/get-pelanggaran-mhs', [
                     'nim' => $nim,
+                    'ta' => '',
+                    'sem_ta' => '',
                 ]);
-
-            Log::info('Raw Pelanggaran Response:', ['response' => $pelanggaranResponse->body()]);
 
             if ($response->successful() && $pelanggaranResponse->successful()) {
                 $data = $response->json();
@@ -44,18 +44,23 @@ class CatatanPerilakuController extends Controller
 
                 // Tambahkan pelanggaran ke masing-masing nilai perilaku
                 foreach ($nilaiPerilaku as &$perilaku) {
-                    $perilaku['semester'] = $this->convertSemester($perilaku['sem_ta']);
+                    $perilaku['semester'] = $this->convertSemester($perilaku['sem_ta'] ?? 0);
                     $filteredPelanggaran = array_filter($pelanggaranList, function ($pelanggaran) use ($perilaku) {
-                        return (int)$pelanggaran['ta'] === (int)$perilaku['ta'] && (int)$pelanggaran['sem_ta'] === (int)$perilaku['sem_ta'];
+                        return (int) $pelanggaran['ta'] === (int) $perilaku['ta']
+                            && (int) $pelanggaran['sem_ta'] === (int) $perilaku['sem_ta'];
                     });
+
                     $perilaku['pelanggaran'] = array_values($filteredPelanggaran);
 
-                    Log::info('Filtered Pelanggaran for TA and SEM_TA', [
+                    Log::info('Filtered Pelanggaran', [
                         'ta' => $perilaku['ta'],
                         'sem_ta' => $perilaku['sem_ta'],
-                        'filtered_pelanggaran' => $perilaku['pelanggaran']
+                        'filtered' => $filteredPelanggaran
                     ]);
                 }
+
+                Log::info('Processed Perilaku with Pelanggaran', ['nilaiPerilaku' => $nilaiPerilaku]);
+
 
                 return view('catatanPerilaku.catatan_perilaku', compact('nilaiPerilaku'));
             }
@@ -66,7 +71,6 @@ class CatatanPerilakuController extends Controller
             return redirect()->route('beranda')->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
     }
-
 
     private function convertSemester($sem_ta)
     {
