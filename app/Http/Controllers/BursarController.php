@@ -30,11 +30,20 @@ class BursarController extends Controller
                     'bulan' => '',
                 ]);
 
+            $response2 = Http::withToken($apiToken)
+                ->withOptions(['verify' => false])
+                ->get('https://cis-dev.del.ac.id/api/aktivitas-mhs-api/get-virtual-account', [
+                    'nim' => $nim,
+                ]);
+
             Log::info('API Response', ['status' => $response->status(), 'body' => $response->body()]);
 
-            if ($response->successful()) {
+            if ($response->successful() && $response2->successful()) {
                 $data = $response->json();
                 $bursarData = $data['data'] ?? [];
+
+                $data2 = $response2->json();
+                $VAData = $data2['data'] ?? [];
 
                 // Pagination manual
                 $perPage = 10;
@@ -51,6 +60,7 @@ class BursarController extends Controller
                     'total' => $total,
                     'currentPage' => $currentPage,
                     'perPage' => $perPage,
+                    'VAData' => $VAData,
                 ]);
             }
 

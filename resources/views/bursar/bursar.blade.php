@@ -5,8 +5,8 @@
     <div class="d-flex align-items-center mb-4 border-bottom-line">
         <!-- Link ke halaman Home dan Bursar -->
         <h3 class="me-auto">
-        <a href="{{ route('beranda') }}">Home</a> /
-        <a href="{{ route('bursar') }}">Bursar</a>
+            <a href="{{ route('beranda') }}">Home</a> /
+            <a href="{{ route('bursar') }}">Bursar</a>
         </h3>
         <a href="#" onclick="confirmLogout()">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
@@ -23,13 +23,14 @@
                 </div>
             </div>
         </div>
-        <h5 class="va-text mb-5">VA (Bank Mandiri) 8823 3111 1722 036</h5>
+        <h5 class="va-text mb-5">VA ( Bank {{ $VAData['bank'] ?? 'BNI' }} ) : {{ $VAData['virtual_account'] ?? null }}</h5>
     </div>
 
     <!-- Riwayat Tagihan -->
     <div class="card-header bg-white mt-5 mb-4">
         <h4 class="text-start"><i class="fas fa-history me-2"></i> History Tagihan</h4>
-        <h5 class="text-start"><i class="fas fa-lock me-2"></i>Closed Payment VER: Verified, VWC: Verified With Credit, POS: Postponed, NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit</h5>
+        <h5 class="text-start"><i class="fas fa-lock me-2"></i>Closed Payment VER: Verified, VWC: Verified With Credit, POS:
+            Postponed, NEW: New Bill, REQ: Payment Requested, RPO: Req for Postpone, RCR: Req for Credit</h5>
     </div>
     <div class="card-body">
         <table class="table table-bordered">
@@ -132,7 +133,7 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '{{ route('logout') }}';  // Arahkan ke route logout jika 'Ya' dipilih
+                    window.location.href = '{{ route('logout') }}'; // Arahkan ke route logout jika 'Ya' dipilih
                 }
             });
         }
