@@ -736,3 +736,10 @@ p {
     margin-left: 0; /* Rata kiri */
     margin-right: auto;
 }
+
+.mark-yellow {
+    background-color: #ffffcc; /* Kuning muda */
+    padding: 5px;             /* Tambahkan spasi di sekitar teks */
+    border-radius: 4px;       /* Opsional: Tambahkan sudut tumpul */
+}
+

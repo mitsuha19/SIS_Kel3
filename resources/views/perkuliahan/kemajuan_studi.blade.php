@@ -45,7 +45,13 @@
                         <!-- Menampilkan IP Semester di atas tabel -->
                         @foreach ($sortedSemesterData as $semesterData)
                             @if ($semesterData['semester'] == $semester)
-                                <p><strong>IP Semester: {{ $semesterData['ip_semester'] }}</strong></p>
+                                <div class="col-md-12 text-end">
+                                    <p><strong>
+                                        <span  class="mark-yellow">
+                                           NR/IPS: {{ $semesterData['ip_semester'] }}
+                                        </span>
+                                    </strong></p>
+                                </div>
                             @endif
                         @endforeach
 

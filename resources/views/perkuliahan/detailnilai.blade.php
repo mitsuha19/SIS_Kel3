@@ -13,11 +13,11 @@
         </div>
 
         <!-- Informasi Mata Kuliah -->
-        <h3 class="mb-3 underline-bold">Detail Nilai Mata Kuliah</h3>
+        <h3 class="mb-3 underline-bold">Nilai Mahasiswa</h3>
         <div class="card-nilai p-3 shadow-sm mb-4">
             <table class="table table-bordered table-nilai">
                 <tbody>
-                    <tr>
+                    <tr>    
                         <th>Kode Mata Kuliah</th>
                         <td>{{ $matkul['kode_mk'] }}</td>
                     </tr>
@@ -45,11 +45,12 @@
             </table>
         </div>
 
-        <ul class="nav nav-tabs nav-tabs-nilai" id="nilaiTabs" role="tablist">
+        <ul class="nav nav-tabs nav-tabs-nilai " id="nilaiTabs" role="tablist"> 
             <li class="nav-item">
                 <button class="nav-link active" id="praktikum-tab" data-bs-toggle="tab" data-bs-target="#praktikum"
                     type="button" role="tab" aria-controls="praktikum" aria-selected="true">Praktikum</button>
             </li>
+
             <li class="nav-item">
                 <button class="nav-link" id="tugas-tab" data-bs-toggle="tab" data-bs-target="#tugas" type="button"
                     role="tab" aria-controls="tugas" aria-selected="false">Tugas</button>
