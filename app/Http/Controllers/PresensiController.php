@@ -19,18 +19,32 @@ class PresensiController extends Controller
         }
 
         try {
-            $response = Http::withToken($apiToken)
+            // API Presensi
+            $presensiResponse = Http::withToken($apiToken)
                 ->withOptions(['verify' => false])
                 ->get('https://cis-dev.del.ac.id/api/aktivitas-mhs-api/get-presensi-by-nim', [
                     'nim' => $nim,
                 ]);
 
-            if ($response->successful()) {
-                $data = $response->json()['data'] ?? [];
+            // API Nilai Akhir
+            $nilaiResponse = Http::withToken($apiToken)
+                ->withOptions(['verify' => false])
+                ->get('https://cis-dev.del.ac.id/api/library-api/nilai-akhir', [
+                    'nim' => $nim,
+                ]);
 
-                // Proses data untuk menghitung persentase kehadiran
+            if ($presensiResponse->successful() && $nilaiResponse->successful()) {
+                $presensiData = $presensiResponse->json()['data'] ?? [];
+                $nilaiData = $nilaiResponse->json()['data'] ?? [];
+
+                // Map SKS dari API Nilai Akhir
+                $sksMap = collect($nilaiData)->keyBy('kode_mk')->map(function ($item) {
+                    return $item['sks'];
+                });
+
+                // Proses data presensi dengan SKS
                 $attendances = [];
-                foreach ($data as $course) {
+                foreach ($presensiData as $course) {
                     $totalSessions = count($course['presensi']);
                     $attendedSessions = count(array_filter($course['presensi'], function ($session) {
                         return $session['status_kehadiran'] == 4; // Status hadir
@@ -41,7 +55,7 @@ class PresensiController extends Controller
                     $attendances[] = [
                         'kode_mk' => $course['kode_mk'],
                         'nama_mk' => $course['nama'],
-                        'sks' => $course['sks'] ?? 0,
+                        'sks' => $sksMap[$course['kode_mk']] ?? 0, // Ambil SKS dari Map
                         'total_sessions' => $totalSessions,
                         'attended_sessions' => $attendedSessions,
                         'attendance_percentage' => $attendancePercentage,
@@ -52,12 +66,13 @@ class PresensiController extends Controller
                 return view('perkuliahan.absensi', compact('attendances'));
             }
 
-            return redirect()->route('beranda')->withErrors(['error' => 'Gagal mengambil data absensi.']);
+            return redirect()->route('beranda')->withErrors(['error' => 'Gagal mengambil data absensi atau nilai.']);
         } catch (\Exception $e) {
             Log::error('Kesalahan API:', ['message' => $e->getMessage()]);
             return redirect()->route('beranda')->withErrors(['error' => 'Terjadi kesalahan saat mengambil data.']);
         }
     }
+
 
     public function showDetail($kodeMk)
     {
