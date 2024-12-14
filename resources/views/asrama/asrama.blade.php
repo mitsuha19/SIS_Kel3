@@ -5,8 +5,8 @@
     <div class="d-flex align-items-center mb-4 border-bottom">
         <!-- Link ke halaman Home -->
         <h3 class="me-auto">
-        <a href="{{ route('beranda') }}">Home</a> /
-        <a href="{{ route('asrama') }}">Asrama</a> 
+            <a href="{{ route('beranda') }}">Home</a> /
+            <a href="{{ route('asrama') }}">Asrama</a>
         </h3>
         <a href="#" onclick="confirmLogout()">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
@@ -79,7 +79,7 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '{{ route('logout') }}';  // Arahkan ke route logout jika 'Ya' dipilih
+                    window.location.href = '{{ route('logout') }}'; // Arahkan ke route logout jika 'Ya' dipilih
                 }
             });
         }

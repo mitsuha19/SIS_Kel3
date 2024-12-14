@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="d-flex align-items-center mb-4 border-bottom-line">
-    <h3 class="me-auto">
-        <a href="{{ route('beranda') }}">Home</a> /
-        <a href="{{ route('izin_bermalam') }}">Perizinan</a> /
-        <a href="{{ route('izin_bermalam') }}">Izin Bermalam</a>
+        <h3 class="me-auto">
+            <a href="{{ route('beranda') }}">Home</a> /
+            <a href="{{ route('izin_bermalam') }}">Perizinan</a> /
+            <a href="{{ route('izin_bermalam') }}">Izin Bermalam</a>
         </h3>
-        <a href="{{ route('logout') }}"><a href="#" onclick="confirmLogout()">
+        <a href="#" onclick="confirmLogout()">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>
     </div>
@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <h4 class="mb-5">Daftar Izin Bermalam</h4>
             <!-- Menambahkan jumlah izin bermalam dengan format Showing 1-10 of x items -->
-                @php
+            @php
                 $startItem = ($currentPage - 1) * $perPage + 1;
                 $endItem = min($currentPage * $perPage, $total);
             @endphp
@@ -107,7 +107,7 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '{{ route('logout') }}';  // Arahkan ke route logout jika 'Ya' dipilih
+                    window.location.href = '{{ route('logout') }}'; // Arahkan ke route logout jika 'Ya' dipilih
                 }
             });
         }

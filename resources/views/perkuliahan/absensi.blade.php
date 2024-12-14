@@ -9,7 +9,7 @@
                 <a href="{{ route('absensi') }}">Perkuliahan</a> /
                 <a href="{{ route('profil') }}">Absensi Mahasiswa</a>
             </h3>
-            <a href="#" onclick="confirmLogout()" class="ms-auto">
+            <a href="#" onclick="confirmLogout()">
                 <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
             </a>
         </div>

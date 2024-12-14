@@ -3,11 +3,11 @@
 @section('content')
     <div class="app-wrapper px-4">
         <div class="d-flex align-items-center mb-4 border-bottom-line">
-        <h3 class="me-auto">
-        <a href="{{ route('beranda') }}">Home</a> /
-        <a href="{{ route('profil') }}">Profil</a>
-        </h3>
-            <a href="#" onclick="confirmLogout()" class="ms-auto">
+            <h3 class="me-auto">
+                <a href="{{ route('beranda') }}">Home</a> /
+                <a href="{{ route('profil') }}">Profil</a>
+            </h3>
+            <a href="#" onclick="confirmLogout()">
                 <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
             </a>
         </div>
@@ -62,21 +62,21 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function confirmLogout() {
-        Swal.fire({
-            title: 'Apakah anda yakin ingin keluar?',
-            text: "Anda akan keluar dari akun ini.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, keluar!',
-            cancelButtonText: 'Tidak',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '{{ route('logout') }}';  // Arahkan ke route logout jika 'Ya' dipilih
-            }
-        });
-    }
-</script>
+    <script>
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Apakah anda yakin ingin keluar?',
+                text: "Anda akan keluar dari akun ini.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, keluar!',
+                cancelButtonText: 'Tidak',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '{{ route('logout') }}'; // Arahkan ke route logout jika 'Ya' dipilih
+                }
+            });
+        }
+    </script>
 @endsection

@@ -10,6 +10,9 @@
                 <a href="{{ route('kemajuan_studi') }}">Kemajuan Studi</a> /
                 <a href="#">Detail Nilai</a>
             </h3>
+            <a href="#" onclick="confirmLogout()">
+                <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+            </a>
         </div>
 
         <!-- Informasi Mata Kuliah -->
@@ -17,7 +20,7 @@
         <div class="card-nilai p-3 shadow-sm mb-4">
             <table class="table table-bordered table-nilai">
                 <tbody>
-                    <tr>    
+                    <tr>
                         <th>Kode Mata Kuliah</th>
                         <td>{{ $matkul['kode_mk'] }}</td>
                     </tr>
@@ -45,7 +48,7 @@
             </table>
         </div>
 
-        <ul class="nav nav-tabs nav-tabs-nilai " id="nilaiTabs" role="tablist"> 
+        <ul class="nav nav-tabs nav-tabs-nilai " id="nilaiTabs" role="tablist">
             <li class="nav-item">
                 <button class="nav-link active" id="praktikum-tab" data-bs-toggle="tab" data-bs-target="#praktikum"
                     type="button" role="tab" aria-controls="praktikum" aria-selected="true">Praktikum</button>

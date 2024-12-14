@@ -8,7 +8,7 @@
             <a href="{{ route('kemajuan_studi') }}">Perkuliahan</a> /
             <a href="{{ route('kemajuan_studi') }}">Kemajuan Studi</a>
         </h3>
-        <a href="{{ route('logout') }}">
+        <a href="#" onclick="confirmLogout()">
             <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
         </a>
     </div>
@@ -25,63 +25,62 @@
         </div>
 
         <!-- IP, NR, IPS -->
-    
-            <div class="col mt-4">
-                <div class="row">
-                    <div class="col-4">
-                            <h5 class="card-title">IP : {{ $data['IP'] }}</h5>
-                    </div>
+
+        <div class="col mt-4">
+            <div class="row">
+                <div class="col-4">
+                    <h5 class="card-title">IP : {{ $data['IP'] }}</h5>
                 </div>
             </div>
+        </div>
 
 
         <!-- Tabel Mata Kuliah per Semester -->
         @foreach ($matkulPerSemester as $semester => $matkuls)
             <div class="row justify-content-center mt-4">
-               
-                    
-                        <h5 class="card-title">Mata Kuliah {{ $semester }}</h5>
 
-                        <!-- Menampilkan IP Semester di atas tabel -->
-                        @foreach ($sortedSemesterData as $semesterData)
-                            @if ($semesterData['semester'] == $semester)
-                                <div class="col-md-12 text-end">
-                                    <p><strong>
-                                        <span  class="mark-yellow">
-                                           NR/IPS: {{ $semesterData['ip_semester'] }}
-                                        </span>
-                                    </strong></p>
-                                </div>
-                            @endif
+
+                <h5 class="card-title">Mata Kuliah {{ $semester }}</h5>
+
+                <!-- Menampilkan IP Semester di atas tabel -->
+                @foreach ($sortedSemesterData as $semesterData)
+                    @if ($semesterData['semester'] == $semester)
+                        <div class="col-md-12 text-end">
+                            <p><strong>
+                                    <span class="mark-yellow">
+                                        NR/IPS: {{ $semesterData['ip_semester'] }}
+                                    </span>
+                                </strong></p>
+                        </div>
+                    @endif
+                @endforeach
+
+                <!-- Tabel Mata Kuliah -->
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Kode Mata Kuliah</th>
+                            <th>Nama Mata Kuliah</th>
+                            <th>SKS</th>
+                            <th>Nilai Akhir</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($matkuls as $matkul)
+                            <tr>
+                                <td>{{ $matkul['kode_mk'] }}</td>
+                                <td><a
+                                        href="{{ route('detailnilai', ['kode_mk' => $matkul['kode_mk']]) }}">{{ $matkul['nama_kul_ind'] }}</a>
+                                </td>
+                                <td>{{ $matkul['sks'] }}</td>
+                                <td>{{ $matkul['na'] }}</td>
+                                <td>{{ $matkul['nilai'] }}</td>
+                            </tr>
                         @endforeach
-
-                        <!-- Tabel Mata Kuliah -->
-                        <table class="table table-bordered table-hover">
-                            <thead >
-                            <tr >
-                                    <th>Kode Mata Kuliah</th>
-                                    <th>Nama Mata Kuliah</th>
-                                    <th>SKS</th>
-                                    <th>Nilai Akhir</th>
-                                    <th>Grade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($matkuls as $matkul)
-                                    <tr>
-                                        <td>{{ $matkul['kode_mk'] }}</td>
-                                        <td><a
-                                                href="{{ route('detailnilai', ['kode_mk' => $matkul['kode_mk']]) }}">{{ $matkul['nama_kul_ind'] }}</a>
-                                        </td>
-                                        <td>{{ $matkul['sks'] }}</td>
-                                        <td>{{ $matkul['na'] }}</td>
-                                        <td>{{ $matkul['nilai'] }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                </div>
-      
+                    </tbody>
+                </table>
+            </div>
         @endforeach
     </div>
 

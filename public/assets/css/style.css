@@ -739,7 +739,11 @@ p {
 
 .mark-yellow {
     background-color: #ffffcc; /* Kuning muda */
-    padding: 5px;             /* Tambahkan spasi di sekitar teks */
-    border-radius: 4px;       /* Opsional: Tambahkan sudut tumpul */
+    padding: 5px; /* Tambahkan spasi di sekitar teks */
+    border-radius: 4px; /* Opsional: Tambahkan sudut tumpul */
 }
 
+#pengumumanModal .modal-content {
+    width: 50%;
+    margin: 30px auto;
+}

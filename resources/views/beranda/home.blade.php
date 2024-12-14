@@ -6,9 +6,10 @@
         <h3 class="me-auto">
             <a href="{{ route('beranda') }}">Home</a>
         </h3>
-        <a href="{{ route('logout') }}"><a href="#" onclick="confirmLogout()">
-                <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
-            </a>
+        <a href="#" onclick="confirmLogout()">
+            <i class="fas fa-sign-out-alt fs-5 cursor-pointer" title="Logout"></i>
+        </a>
+
     </div>
 
     <!-- Konten Utama -->
@@ -98,57 +99,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const pengumumanModal = document.getElementById('pengumumanModal');
-            const modalTitle = document.getElementById('pengumumanModalLabel'); // Elemen judul modal
-            const modalBody = document.getElementById('pengumumanDeskripsi'); // Elemen deskripsi modal
-
-            pengumumanModal.addEventListener('show.bs.modal', function(event) {
-                // Elemen yang memicu modal
-                const button = event.relatedTarget;
-
-                // Ambil data dari atribut tombol
-                const judul = button.getAttribute('data-judul');
-                const deskripsi = button.getAttribute('data-deskripsi');
-
-                // Cetak nilai ke console setelah didefinisikan
-                console.log('Judul:', judul);
-                console.log('Deskripsi:', deskripsi);
-
-                // Masukkan data ke modal
-                modalTitle.textContent = judul;
-                modalBody.textContent = deskripsi;
-            });
-        });
-
-        function confirmLogout() {
-            Swal.fire({
-                title: 'Apakah anda yakin ingin keluar?',
-                text: "Anda akan keluar dari akun ini.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, keluar!',
-                cancelButtonText: 'Tidak',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '{{ route('logout') }}'; // Arahkan ke route logout jika 'Ya' dipilih
-                }
-            });
-        }
-    </script>
-
-@section('styles')
-    <style>
-        #pengumumanModal .modal-content {
-            width: 50%;
-            margin: 30px auto;
-        }
-    </style>
 @endsection
