@@ -58,6 +58,13 @@
                     @endif
                 </div>
 
+                <div class="forgot-password">
+                    <a href="{{ route('password.forgot') }}"
+                        style="color: #ffffff; font-size: 14px; text-align: right; display: block; margin-top: 10px;">
+                        Lupa Password?
+                    </a>
+                </div>
+
                 <!-- Tombol Login -->
                 <center>
                     <button type="submit" class="btn">Login</button>

@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IBController;
 use App\Http\Controllers\IKController;
@@ -12,15 +15,22 @@ use App\Http\Controllers\BursarController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\CatatanPerilakuController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\DetailNilaiController;
 use App\Http\Controllers\KemajuanStudiController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\CatatanPerilakuController;
 
 // Login dan Logout
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])->name('password.forgot');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.send-link');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetPasswordForm'])->name('password.reset.form');
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+
 
 // Middleware untuk akses yang memerlukan autentikasi
 Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->group(function () {
