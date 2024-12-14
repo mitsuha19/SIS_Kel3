@@ -62,7 +62,7 @@
                 <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modalKalenderAkademik">Unggah
                     Kalender Akademik</button>
                 <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modalKalenderBEM">Unggah
-                    Kalender BEM</button>
+                    Kalender NonAkademik</button>
                 <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modalPengumuman">Unggah
                     Pengumuman</button>
             </div>
@@ -79,7 +79,8 @@
                 @endif
 
                 @if ($bem)
-                    <p><a href="{{ asset('storage/' . $bem->file_path) }}" target="_blank">Lihat Kalender BEM</a></p>
+                    <p><a href="{{ asset('storage/' . $bem->file_path) }}" target="_blank">Lihat Kalender NonAkademik</a>
+                    </p>
                 @endif
             </div>
 
@@ -119,7 +120,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalKalenderBEMLabel">Unggah Kalender BEM</h5>
+                    <h5 class="modal-title" id="modalKalenderBEMLabel">Unggah Kalender NonAdemik</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="{{ route('calendar.upload') }}" enctype="multipart/form-data">
@@ -146,7 +147,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="modalPengumumanLabel">Unggah Kalender Pengumuman</h5>
+                    <h5 class="modal-title" id="modalPengumumanLabel">Unggah Pengumuman</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formPengumuman" method="POST" action="{{ route('pengumuman.store') }}">
@@ -252,6 +253,6 @@
             margin: 30px auto;
         }
     </style>
-@endsection }
+@endsection
 </style>
 @endsection

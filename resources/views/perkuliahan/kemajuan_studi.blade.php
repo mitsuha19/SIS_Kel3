@@ -39,7 +39,6 @@
         @foreach ($matkulPerSemester as $semester => $matkuls)
             <div class="row justify-content-center mt-4">
 
-
                 <h5 class="card-title">Mata Kuliah {{ $semester }}</h5>
 
                 <!-- Menampilkan IP Semester di atas tabel -->

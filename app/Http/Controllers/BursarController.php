@@ -10,24 +10,20 @@ class BursarController extends Controller
 {
     public function index(Request $request)
     {
-        $user = session('user'); // Mendapatkan data user dari session
-        $nim = $user['nim'] ?? null; // NIM user saat login
-        $apiToken = session('api_token'); // Token API dari session
+        // Fetch the API data as you are doing currently
+        $user = session('user');
+        $nim = $user['nim'] ?? null;
+        $apiToken = session('api_token');
 
         if (!$nim) {
-            Log::error('NIM tidak ditemukan dalam session.');
             return redirect()->route('beranda')->withErrors(['error' => 'NIM tidak ditemukan.']);
         }
 
-        Log::info('NIM fetched from session', ['nim' => $nim]);
-
         try {
             $response = Http::withToken($apiToken)
-                ->withOptions(['verify' => false]) // Abaikan verifikasi SSL
+                ->withOptions(['verify' => false])
                 ->get('https://cis-dev.del.ac.id/api/aktivitas-mhs-api/get-bursar-mhs', [
                     'nim' => $nim,
-                    'tahun' => '',
-                    'bulan' => '',
                 ]);
 
             $response2 = Http::withToken($apiToken)
@@ -36,23 +32,20 @@ class BursarController extends Controller
                     'nim' => $nim,
                 ]);
 
-            Log::info('API Response', ['status' => $response->status(), 'body' => $response->body()]);
-
             if ($response->successful() && $response2->successful()) {
-                $data = $response->json();
-                $bursarData = $data['data'] ?? [];
+                $bursarData = $response->json()['data'] ?? [];
+                $VAData = $response2->json()['data'] ?? [];
 
-                $data2 = $response2->json();
-                $VAData = $data2['data'] ?? [];
+                // Add a unique identifier to each item
+                foreach ($bursarData as $index => &$item) {
+                    $item['id'] = $index; // Use the array index as the ID
+                }
 
-                // Pagination manual
+                // Pagination
                 $perPage = 10;
-                $currentPage = $request->input('page', 1); // Ambil halaman saat ini dari input
+                $currentPage = $request->input('page', 1);
                 $offset = ($currentPage - 1) * $perPage;
-
-                // Balikkan urutan data dan ambil halaman yang diminta
-                $reversedData = array_reverse($bursarData);
-                $paginatedData = array_slice($reversedData, $offset, $perPage);
+                $paginatedData = array_slice($bursarData, $offset, $perPage);
                 $total = count($bursarData);
 
                 return view('bursar.bursar', [
@@ -66,8 +59,53 @@ class BursarController extends Controller
 
             return redirect()->route('beranda')->withErrors(['error' => 'Gagal mengambil data bursar dari API.']);
         } catch (\Exception $e) {
-            Log::error('Kesalahan API:', ['message' => $e->getMessage()]);
             return redirect()->route('beranda')->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()]);
+        }
+    }
+
+
+    public function showDetail($id)
+    {
+        $user = session('user');
+        $nim = $user['nim'] ?? null;
+        $apiToken = session('api_token');
+
+        if (!$nim) {
+            return redirect()->route('beranda')->withErrors(['error' => 'NIM tidak ditemukan.']);
+        }
+
+        try {
+            $response = Http::withToken($apiToken)
+                ->withOptions(['verify' => false])
+                ->get('https://cis-dev.del.ac.id/api/aktivitas-mhs-api/get-bursar-mhs', [
+                    'nim' => $nim,
+                ]);
+
+            $response2 = Http::withToken($apiToken)
+                ->withOptions(['verify' => false])
+                ->get('https://cis-dev.del.ac.id/api/aktivitas-mhs-api/get-virtual-account', [
+                    'nim' => $nim,
+                ]);
+
+            if ($response->successful() && $response2->successful()) {
+                $bursarData = $response->json()['data'] ?? [];
+                $VAData = $response2->json()['data'] ?? [];
+
+                if (!isset($bursarData[$id])) {
+                    return redirect()->route('bursar')->withErrors(['error' => 'Detail tidak ditemukan.']);
+                }
+
+                $bursarDetail = $bursarData[$id];
+
+                return view('bursar.detail', [
+                    'bursarDetail' => $bursarDetail,
+                    'VAData' => $VAData,
+                ]);
+            }
+
+            return redirect()->route('bursar')->withErrors(['error' => 'Gagal mengambil data bursar dari API.']);
+        } catch (\Exception $e) {
+            return redirect()->route('bursar')->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()]);
         }
     }
 }

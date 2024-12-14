@@ -33,6 +33,10 @@
                                 <th>PENGURUS ASRAMA</th>
                                 <td>{{ $pembinaAsrama }}</td>
                             </tr>
+                            <tr>
+                                <th>KONTAK KEASRAMAAN</th>
+                                <td>+62 812 1222 1189</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

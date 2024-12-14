@@ -74,7 +74,7 @@
 
                     @if ($bem)
                         <a href="{{ asset('storage/' . $bem->file_path) }}" target="_blank" class="btn btn-primary">
-                            Unduh Kalender BEM!
+                            Unduh Kalender NonAkademik!
                         </a>
                     @else
                         <button class="btn btn-secondary" disabled>Kalender BEM Belum Tersedia</button>

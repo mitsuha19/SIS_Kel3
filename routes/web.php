@@ -30,6 +30,9 @@ Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPassw
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.send-link');
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetPasswordForm'])->name('password.reset.form');
 Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::get('/waiting-email', function () {
+    return view('auth.waiting-email');
+})->name('password.waiting-email');
 
 
 // Middleware untuk akses yang memerlukan autentikasi
@@ -45,6 +48,8 @@ Route::middleware(['auth.session', 'ensure.student.data', 'role:student'])->grou
     Route::get('/perizinan/izin_keluar', [IKController::class, 'index'])->name('izin_keluar');
     //bursar
     Route::get('bursar/bursar', [BursarController::class, 'index'])->name('bursar');
+    Route::get('/bursar/{id}', [BursarController::class, 'showDetail'])->name('bursar.detail');
+
     //asrama
     Route::get('asrama/asrama', [AsramaController::class, 'index'])->name('asrama');
 

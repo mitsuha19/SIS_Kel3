@@ -104,7 +104,7 @@ class PasswordResetController extends Controller
 
                     Log::info('Email berhasil dikirim.');
 
-                    return back()->with('success', 'Email reset password telah dikirim.');
+                    return redirect()->route('password.waiting-email');
                 }
 
                 return back()->withErrors(['nim' => 'Email untuk NIM ini tidak ditemukan.']);

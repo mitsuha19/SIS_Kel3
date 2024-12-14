@@ -119,8 +119,8 @@ body {
     transition: background 0.3s ease;
     margin-top: 3rem;
     margin-bottom: 1rem;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), /* Bottom-right shadow */
-                -3px 0px 6px rgba(0, 0, 0, 0.2); /* Left shadow */
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2),
+        /* Bottom-right shadow */ -3px 0px 6px rgba(0, 0, 0, 0.2); /* Left shadow */
 }
 
 .btn:hover {
@@ -156,4 +156,48 @@ body {
 .student-text {
     font-size: 25px;
     color: #add8e6; /* Light blue color */
+}
+
+.email-section {
+    flex: 1;
+    background: linear-gradient(to bottom, #0b689d, #d7ede2);
+    padding: 10px 80px 40px 80px;
+    border-radius: 20px;
+    box-shadow: 6px 8px 0 rgba(0, 0, 0, 0.3); /* Solid shadow */
+    max-width: 600px;
+}
+
+/* Center Container */
+.email-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Full height for centering */
+    padding: 20px;
+}
+
+/* Notification Card */
+.email-notification-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    padding: 30px 50px; /* Wider padding for readability */
+    max-width: 800px; /* Adjust width for larger screens */
+    width: 70%;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Heading Styling */
+.email-heading {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+/* Text Content Styling */
+.email-content {
+    font-size: 16px;
+    line-height: 1.6; /* Improved readability */
+    margin-bottom: 20px;
+    color: #333;
 }

@@ -55,10 +55,9 @@
                         <td>{{ number_format($item['total_nominal'] ?? 0, 2, ',', '.') }}</td>
                         <td>{{ $item['status'] ?? 'N/A' }}</td>
                         <td>
-                            <button class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                                data-bs-target="#detailModal{{ $index }}">
-                                <i class="fas fa-info-circle"></i> <small> Details </small>
-                            </button>
+                            <a href="{{ route('bursar.detail', $item['id']) }}" class="btn btn-sm btn-secondary">
+                                <i class="fas fa-info-circle"></i> <small>Details</small>
+                            </a>
                         </td>
                     </tr>
 
