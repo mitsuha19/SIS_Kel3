@@ -24,6 +24,11 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('nim', $request->nim)->first();
+
+        if (!$user) {
+            return back()->withErrors(['login' => 'NIM tidak ditemukan.']);
+        }
+
         Log::info('Input Password:', ['input' => $request->password]);
         Log::info('Hashed Password in DB:', ['hashed' => $user->password]);
 
