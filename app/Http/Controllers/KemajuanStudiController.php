@@ -16,12 +16,14 @@ class KemajuanStudiController extends Controller
         try {
             $response = Http::withToken($apiToken)
                 ->withOptions(['verify' => false])
+                ->timeout(60)
                 ->get('https://cis-dev.del.ac.id/api/library-api/get-penilaian', [
                     'nim' => $nim,
                 ]);
 
             $response2 = Http::withToken($apiToken)
                 ->withOptions(['verify' => false])
+                ->timeout(60)
                 ->get('https://cis-dev.del.ac.id/api/library-api/nilai-akhir', [
                     'nim' => $nim,
                 ]);
